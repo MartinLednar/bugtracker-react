@@ -1,0 +1,54 @@
+.project-wrapper {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-heading-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.project-action-box {
+  display: flex;
+  align-items: center;
+  font-size: 2.1rem;
+}
+
+.project-add-btn,
+.project-delete-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-add-btn {
+  cursor: pointer;
+  border: 2px solid var(--color-green);
+  margin-right: 0.8rem;
+  padding: 0.3rem 2rem;
+  border-radius: 3px;
+  transition: all 0.5s;
+}
+
+.project-add-btn:hover {
+  background-color: var(--color-green);
+  color: white;
+}
+
+.project-delete-btn {
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  color: white;
+  background-color: var(--color-red) !important;
+}
+
+.project-delete-btn svg,
+.project-add-btn:not(:first-child) svg {
+  margin-left: 0.5rem;
+}

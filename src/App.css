@@ -1,38 +1,351 @@
-.App {
-  text-align: center;
+/*Vseobecne classy*/
+#no-padding {
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.heading-terciary {
+  font-size: 3rem;
+  font-weight: 400;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.heading-secondary {
+  font-family: var(--font-heading);
+  font-size: 3.5rem;
+  font-weight: 500;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.text-bold {
+  font-family: var(--font-heading);
+  font-weight: 500;
+}
+
+.close-modal-btn {
+  display: block;
+  text-align: right;
+  cursor: pointer;
+  min-height: 2.8rem;
+  min-width: 2.8rem;
+  transition: all 0.5s;
+  margin: 0 0 0 auto;
+}
+
+.close-modal-btn:hover {
+  color: var(--color-red);
+}
+
+.radio-group {
+  margin-top: 4rem;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.radio-group .input-group:not(:last-child) {
+  margin-right: 3rem;
+}
+
+.input-group input {
+  margin-left: 1rem;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.input-group label {
+  display: flex;
+  align-items: center;
+}
+
+.input-group label svg {
+  margin-right: 0.5rem;
+}
+.input-group-column {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5rem;
+}
+
+.input-group-column .heading-terciary {
+  margin-bottom: 0.3rem;
+  font-size: 2.5rem;
+}
+
+.input-group-column .radio-group {
+  margin-top: 0.5rem;
+  justify-content: space-between;
+}
+
+.input-group-column .radio-group .input-group {
+  margin-right: 0;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input,
+textarea {
+  font-size: inherit;
+  font-family: var(--font-text);
+  font-weight: 400;
+  padding: 0.5rem 0.8rem;
+  outline: none;
+  border: 1px solid rgb(200, 200, 200);
+  border-radius: 3px;
+}
+
+input:focus,
+textarea:focus {
+  border-color: rgb(130, 130, 130);
+}
+
+.submit-form-btn {
+  margin-left: auto;
+  font-family: inherit;
+  padding: 0.5rem 1.5rem;
+  outline: none;
+  cursor: pointer;
+  background-color: transparent;
+  border-radius: 3px;
+  margin-top: 4rem;
+  font-size: 2.1rem;
+  border: 2px solid var(--color-green);
+  transition: all 0.5s;
+}
+
+.submit-form-btn:hover {
   color: white;
+  background-color: var(--color-green);
 }
 
-.App-link {
-  color: #61dafb;
+/*Vseobecne classy*/
+
+.main-box {
+  position: relative;
+  display: flex;
+  height: calc(100vh - 90px);
+  min-height: 500px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.under-text-link {
+  width: max-content;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+  margin-top: 0.8rem;
+  color: var(--color-blue);
+  border-bottom: 1px solid transparent;
+  transition: all 0.5s;
+}
+
+.under-text-link:hover {
+  border-bottom: 1px solid var(--color-blue);
+}
+
+nav {
+  display: inline-block;
+  margin: 5rem 0 auto;
+}
+
+.nav-item {
+  width: max-content;
+  list-style: none;
+  font-weight: 400;
+  font-size: 2.3rem;
+}
+
+.nav-item:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
+.nav-item:last-child .nav-link {
+  color: var(--color-red);
+}
+
+.nav-item:hover:not(:last-child) .nav-link {
+  opacity: 0.6;
+}
+
+.nav-item:hover:last-child .nav-link {
+  opacity: 0.6;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link svg {
+  margin-right: 1rem;
+}
+
+.nav-icon {
+  margin: 0 0 0 1rem;
+}
+
+.notification {
+  font-size: 1.5rem;
+  color: white;
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+  margin-left: 1rem;
+  border-radius: 100%;
+  background-color: var(--color-blue);
+}
+
+.author {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.author a {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  transition: all 0.5s;
+}
+
+.author a:hover {
+  color: var(--color-green);
+}
+
+.copyright {
+  font-size: 1.8rem;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.main-content {
+  min-height: 500px;
+  position: relative;
+  flex-grow: 1;
+  padding: 0 5rem 5rem;
+  overflow: hidden;
+  overflow-y: visible;
+}
+
+.main-heading {
+  font-size: 4.8rem;
+  font-weight: 600;
+  font-family: var(--font-heading);
+}
+
+/* Samostatne Projekt */
+
+.back-link {
+  text-decoration: none;
+  color: var(--color-blue);
+  display: flex;
+  align-items: center;
+  font-size: 2.1rem;
+  margin-bottom: 1rem;
+}
+
+.back-link svg {
+  width: 2rem;
+  height: 2rem;
+  transition: all 0.5s;
+}
+
+.back-link:hover svg {
+  transform: translateX(-3px);
+}
+
+.input-group-column .project-delete-btn {
+  margin-top: 1.5rem;
+  margin-right: auto;
+  font-size: 2rem;
+}
+
+.responsive-table {
+  margin-top: 8rem;
+  /* padding-bottom: 2rem; */
+  width: 100%;
+  flex-grow: 1;
+  overflow-x: auto;
+  overflow-y: visible;
+}
+
+table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  min-width: max-content;
+}
+
+th {
+  padding: 1rem;
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 500;
+  border-bottom: 1px solid rgb(100, 100, 100);
+}
+
+td {
+  font-size: 2.1rem;
+  padding: 1.8rem 1rem;
+  border-bottom: 1px solid rgb(201, 201, 201);
+}
+
+.table-link {
+  margin: 0 auto;
+  width: max-content;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--color-blue);
+}
+
+.table-link svg {
+  transition: all 0.5s;
+}
+
+.table-link:hover svg {
+  transform: translateX(3px);
+}
+
+.capsule {
+  margin: 0 auto;
+  border-radius: 50px;
+  width: max-content;
+  padding: 0.3rem 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.capsule svg {
+  margin-left: 0.5rem;
+}
+
+.capsule-green {
+  color: white;
+  background-color: var(--color-green);
+}
+.capsule-orange {
+  color: white;
+  background-color: var(--color-orange);
+}
+.capsule-yellow {
+  background-color: var(--color-yellow);
+}
+.capsule-red {
+  color: white;
+  background-color: var(--color-red);
+}
+.capsule-blue {
+  color: white;
+  background-color: var(--color-blue);
 }
