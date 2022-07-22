@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { ChevronLeft, UserPlus, UserMinus, Check, Tool, Trash2 } from "react-feather";
+import { ChevronLeft, UserPlus, Check, Tool, Trash2 } from "react-feather";
 import "./issue.style.scss";
 
 const IssuePage = () => {

@@ -5,7 +5,7 @@ import "./sidebar.style.scss";
 const SidebarMain = () => (
   <div className="sidebar">
     <div className="profile-box">
-      <img className="profile-img" src="/img/basicProfile.svg" alt="Profile picture" />
+      <img className="profile-img" src="/img/basicProfile.svg" alt="Profile" />
 
       <div className="profile-text-box">
         <h2 className="profile-name">Martin Lednár</h2>
@@ -50,16 +50,16 @@ const SidebarMain = () => (
         </Link>
       </li>
       <li className="nav-item">
-        <a href="#" className="nav-link">
+        <p className="nav-link">
           <LogOut />
           Sign out
-        </a>
+        </p>
       </li>
     </nav>
 
     <h4 className="author">
       Site by{" "}
-      <a href="#" className="in-text-link">
+      <a href="https://martinlednar.netlify.app" target="_blank" rel="noreferrer" className="in-text-link">
         Martin Lednár
       </a>
     </h4>

@@ -267,8 +267,7 @@ nav {
 }
 
 .responsive-table {
-  margin-top: 8rem;
-  /* padding-bottom: 2rem; */
+  margin-top: 6rem;
   width: 100%;
   flex-grow: 1;
   overflow-x: auto;

@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import LogoLink from "./components/logo-link/logo-link.component";
 import "./App.css";
 

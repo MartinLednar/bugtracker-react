@@ -15,7 +15,7 @@ const NotificationsPage = () => (
               <td>
                 <div className="notification-msg-box">
                   <div className="notification-sender-box">
-                    <img src="/img/imgBig1.jpg" alt="Profile picture" className="profile-img" />
+                    <img src="/img/imgBig1.jpg" alt="Profile" className="profile-img" />
                     <h3 className="heading-terciary">Martin Lednár -</h3>
                   </div>
 

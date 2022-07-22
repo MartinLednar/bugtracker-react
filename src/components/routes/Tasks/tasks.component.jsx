@@ -3,12 +3,12 @@ import { ChevronRight, Tool } from "react-feather";
 
 const TasksPage = () => (
   <div className="main-content">
-    <div class="tasks-wrapper">
-      <div class="project-heading-box">
-        <h1 class="main-heading">My tasks</h1>
+    <div className="tasks-wrapper">
+      <div className="project-heading-box">
+        <h1 className="main-heading">My tasks</h1>
       </div>
 
-      <div class="responsive-table">
+      <div className="responsive-table">
         <table>
           <thead>
             <tr>
@@ -26,18 +26,18 @@ const TasksPage = () => (
               <td>Fix heading in Actions section</td>
 
               <td>
-                <p class="capsule capsule-orange">
+                <p className="capsule capsule-orange">
                   Fix
                   <Tool />
                 </p>
               </td>
 
               <td>
-                <p class="capsule capsule-red">High</p>
+                <p className="capsule capsule-red">High</p>
               </td>
 
               <td>
-                <Link to="/project/1515151/issue/123456" class="table-link">
+                <Link to="/project/1515151/issue/123456" className="table-link">
                   Go to issue
                   <ChevronRight />
                 </Link>
