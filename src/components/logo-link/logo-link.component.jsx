@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
-import "./logo-link.style.scss";
+import { LogoLinkContainer } from "./logo-link.style";
 
 const LogoLink = () => (
-  <div className="logo-box">
+  <LogoLinkContainer>
     <Link to="/" className="logo">
       <img src="/img/logo.svg" alt="Bugtracker logo" className="logo-img" />
       Bug Tracker
     </Link>
-  </div>
+  </LogoLinkContainer>
 );
 
 export default LogoLink;

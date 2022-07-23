@@ -165,27 +165,8 @@ nav {
   color: var(--color-red);
 }
 
-.nav-item:hover:not(:last-child) .nav-link {
+.nav-item:hover a {
   opacity: 0.6;
-}
-
-.nav-item:hover:last-child .nav-link {
-  opacity: 0.6;
-}
-
-.nav-link {
-  text-decoration: none;
-  color: black;
-  display: flex;
-  align-items: center;
-}
-
-.nav-link svg {
-  margin-right: 1rem;
-}
-
-.nav-icon {
-  margin: 0 0 0 1rem;
 }
 
 .notification {
@@ -314,37 +295,4 @@ td {
 
 .table-link:hover svg {
   transform: translateX(3px);
-}
-
-.capsule {
-  margin: 0 auto;
-  border-radius: 50px;
-  width: max-content;
-  padding: 0.3rem 2rem;
-  display: flex;
-  align-items: center;
-}
-
-.capsule svg {
-  margin-left: 0.5rem;
-}
-
-.capsule-green {
-  color: white;
-  background-color: var(--color-green);
-}
-.capsule-orange {
-  color: white;
-  background-color: var(--color-orange);
-}
-.capsule-yellow {
-  background-color: var(--color-yellow);
-}
-.capsule-red {
-  color: white;
-  background-color: var(--color-red);
-}
-.capsule-blue {
-  color: white;
-  background-color: var(--color-blue);
 }

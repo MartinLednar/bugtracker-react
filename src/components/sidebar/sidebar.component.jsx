@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { Home, Briefcase, Bell, HelpCircle, LogIn, LogOut, ChevronRight } from "react-feather";
-import "./sidebar.style.scss";
+import CustomNavLink from "../nav-link/nav-link.component";
+import { SidebarMainContainer } from "./sidebar.style";
 
 const SidebarMain = () => (
-  <div className="sidebar">
+  <SidebarMainContainer>
     <div className="profile-box">
       <img className="profile-img" src="/img/basicProfile.svg" alt="Profile" />
 
@@ -19,41 +20,41 @@ const SidebarMain = () => (
 
     <nav>
       <li className="nav-item">
-        <Link to="/" className="nav-link">
+        <CustomNavLink to="/">
           <Home />
           My projects
-        </Link>
+        </CustomNavLink>
       </li>
       <li className="nav-item">
-        <Link to="/tasks" className="nav-link">
+        <CustomNavLink to="/tasks">
           <Briefcase />
           My tasks
-        </Link>
+        </CustomNavLink>
       </li>
       <li className="nav-item">
-        <Link to="/notifications" className="nav-link">
+        <CustomNavLink to="/notifications">
           <Bell />
           Notifications
           <span className="notification">1</span>
-        </Link>
+        </CustomNavLink>
       </li>
       <li className="nav-item">
-        <Link to="/guide" className="nav-link">
+        <CustomNavLink to="/guide">
           <HelpCircle />
           Guide
-        </Link>
+        </CustomNavLink>
       </li>
       <li className="nav-item">
-        <Link to="/login" className="nav-link">
+        <CustomNavLink to="/login">
           <LogIn />
           Login page
-        </Link>
+        </CustomNavLink>
       </li>
       <li className="nav-item">
-        <p className="nav-link">
+        <CustomNavLink to="/" style={{ color: "var(--color-red)" }}>
           <LogOut />
           Sign out
-        </p>
+        </CustomNavLink>
       </li>
     </nav>
 
@@ -64,7 +65,7 @@ const SidebarMain = () => (
       </a>
     </h4>
     <h4 className="copyright">Copyright © 2022</h4>
-  </div>
+  </SidebarMainContainer>
 );
 
 export default SidebarMain;
