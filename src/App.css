@@ -296,3 +296,94 @@ td {
 .table-link:hover svg {
   transform: translateX(3px);
 }
+
+.modal-form {
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  overflow-y: visible;
+  scrollbar-width: none;
+}
+
+.results-container:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
+.search-results-box {
+  margin-top: 1.5rem;
+  max-height: 180px;
+  overflow: hidden;
+  overflow-y: visible;
+  scrollbar-width: thin;
+}
+
+#result-box-big {
+  max-height: 360px;
+}
+
+.search-result {
+  padding: 0.8rem 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  border-bottom: 1px solid rgb(218, 218, 218);
+}
+
+.search-result .search-invite-btn {
+  color: var(--color-green);
+  cursor: pointer;
+}
+
+.search-invite-sent-btn {
+  display: flex;
+  align-items: center;
+}
+
+.search-invite-sent-btn svg {
+  margin-left: 0.3rem;
+}
+
+/* normalny sidebar */
+.profile-box {
+  display: flex;
+  align-items: center;
+}
+
+.profile-text-box .under-text-link svg {
+  height: 2rem;
+  width: 2rem;
+  margin-left: -1px;
+  margin-right: -5px;
+}
+
+.profile-img {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 100%;
+  margin-right: 3rem;
+}
+
+.profile-name {
+  font-size: 2.3rem;
+  font-family: var(--font-heading);
+  font-weight: 500;
+}
+
+.profile-info {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.profile-info .profile-img {
+  height: 100%;
+  width: 4.3rem;
+  margin-right: 1rem;
+}
+
+.profile-info .profile-name-search {
+  font-weight: 400;
+}

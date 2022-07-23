@@ -13,9 +13,9 @@ const ProjectsPage = () => {
 
   return (
     <Fragment>
-      <SidebarModalShadow isOpen={sidebarOpen} />
+      <SidebarModalShadow isOpen={sidebarOpen} onClick={toggleSidebar} />
       <SidebarModal isOpen={sidebarOpen}>
-        <X onClick={toggleSidebar} />
+        <X onClick={toggleSidebar} name="sidebar" />
 
         <h2 className="heading-secondary">New project</h2>
 

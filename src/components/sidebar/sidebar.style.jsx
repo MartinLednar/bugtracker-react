@@ -55,7 +55,7 @@ export const SidebarModal = styled(Sidebar)`
   transition-delay: 0.8s;
   transition: transform 0.5s;
 
-  svg {
+  svg[name] {
     display: block;
     text-align: right;
     cursor: pointer;
@@ -80,56 +80,3 @@ export const SidebarModalShadow = styled.div`
   z-index: ${({ isOpen }) => (isOpen ? "998" : "-998")};
   transition: opacity 0.5s, z-index 0.1s;
 `;
-
-// .sidebar-out {
-//   transform: translateX(0);
-// }
-
-// .modal-form {
-//   font-size: 2rem;
-//   display: flex;
-//   flex-direction: column;
-//   height: 100%;
-//   overflow: hidden;
-//   overflow-y: visible;
-//   scrollbar-width: none;
-// }
-
-// .results-container:not(:last-child) {
-//   margin-bottom: 2rem;
-// }
-
-// .search-results-box {
-//   margin-top: 1.5rem;
-//   max-height: 180px;
-//   overflow: hidden;
-//   overflow-y: visible;
-//   scrollbar-width: thin;
-// }
-
-// #result-box-big {
-//   max-height: 360px;
-// }
-
-// .search-result {
-//   padding: 0.8rem 0.5rem;
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-between;
-//   height: 60px;
-//   border-bottom: 1px solid rgb(218, 218, 218);
-// }
-
-// .search-result .search-invite-btn {
-//   color: var(--color-green);
-//   cursor: pointer;
-// }
-
-// .search-invite-sent-btn {
-//   display: flex;
-//   align-items: center;
-// }
-
-// .search-invite-sent-btn svg {
-//   margin-left: 0.3rem;
-// }
