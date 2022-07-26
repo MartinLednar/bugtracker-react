@@ -1,11 +1,24 @@
 import { Fragment, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ChevronRight, Plus, Tool, CheckCircle, AlertTriangle, ChevronLeft, Trash2, UserPlus, X, Send, Star } from "react-feather";
 import { SidebarModal, SidebarModalShadow } from "../../sidebar/sidebar.style";
 import { ARROW_LINK_TYPE_CLASSES, ArrowLink } from "../../arrow-link/arrow-link.component";
+import CustomInput from "../../custom-input/custom-input.component";
 import { Capsule, CAPSULE_STYLE_CLASSES } from "../../capsule/capsule.component";
-
-import "./project.style.scss";
+import { CustomButton, CUSTOM_BUTTON_TYPE_CLASSES } from "../../custom-button/custom-button.component";
+import {
+  MainContentContainer,
+  HeadingContainer,
+  HeadingMain,
+  HeadingTerciary,
+  TableContainer,
+  ProfileImage,
+  HeadingSecondary,
+  InputGroupColumn,
+  RadioGroup,
+  InputGroup,
+} from "../../universal-styles";
+import { ProjectContainer } from "./project.style";
 
 const sidebarsInitialState = {
   sidebar1: false,
@@ -37,163 +50,160 @@ const ProjectPage = () => {
       <SidebarModal isOpen={sidebarOpen.sidebar1}>
         <X onClick={toggleSidebar} name="sidebar1" />
 
-        <h2 className="heading-secondary">New issue</h2>
+        <HeadingSecondary>New issue</HeadingSecondary>
 
         <form action="#" className="modal-form">
-          <div className="input-group-column">
-            <h3 className="heading-terciary">Type</h3>
+          <InputGroupColumn>
+            <HeadingTerciary>Type</HeadingTerciary>
 
-            <div className="radio-group">
-              <div className="input-group">
+            <RadioGroup>
+              <InputGroup>
                 <label htmlFor="project-type-1">
                   <Tool />
                   Fix
                 </label>
-                <input type="radio" name="type" id="project-type-1" />
-              </div>
+                <CustomInput type="radio" name="type" id="project-type-1" />
+              </InputGroup>
 
-              <div className="input-group">
+              <InputGroup>
                 <label htmlFor="project-type-2">
                   <CheckCircle />
                   To-do
                 </label>
-                <input type="radio" name="type" id="project-type-2" />
-              </div>
+                <CustomInput type="radio" name="type" id="project-type-2" />
+              </InputGroup>
 
-              <div className="input-group">
+              <InputGroup>
                 <label htmlFor="project-type-3">
                   <AlertTriangle />
                   Bug
                 </label>
-                <input type="radio" name="type" id="project-type-3" />
-              </div>
-            </div>
-          </div>
+                <CustomInput type="radio" name="type" id="project-type-3" />
+              </InputGroup>
+            </RadioGroup>
+          </InputGroupColumn>
 
-          <div className="input-group-column">
-            <h3 className="heading-terciary">Priority</h3>
+          <InputGroupColumn>
+            <HeadingTerciary>Priority</HeadingTerciary>
 
-            <div className="radio-group">
-              <div className="input-group">
+            <RadioGroup>
+              <InputGroup>
                 <label htmlFor="issue-priority-1"> Low </label>
-                <input type="radio" name="priority" id="issue-priority-1" />
-              </div>
+                <CustomInput type="radio" name="priority" id="issue-priority-1" />
+              </InputGroup>
 
-              <div className="input-group">
+              <InputGroup>
                 <label htmlFor="issue-priority-2"> Medium </label>
-                <input type="radio" name="priority" id="issue-priority-2" />
-              </div>
+                <CustomInput type="radio" name="priority" id="issue-priority-2" />
+              </InputGroup>
 
-              <div className="input-group">
+              <InputGroup>
                 <label htmlFor="issue-priority-3"> High </label>
-                <input type="radio" name="priority" id="issue-priority-3" />
-              </div>
-            </div>
-          </div>
+                <CustomInput type="radio" name="priority" id="issue-priority-3" />
+              </InputGroup>
+            </RadioGroup>
+          </InputGroupColumn>
 
-          <div className="input-group-column">
-            <h3 className="heading-terciary">Title</h3>
-            <input type="text" name="issueName" />
-          </div>
+          <InputGroupColumn>
+            <HeadingTerciary>Title</HeadingTerciary>
+            <CustomInput type="text" name="issueName" />
+          </InputGroupColumn>
 
-          <div className="input-group-column">
-            <h3 className="heading-terciary">Description</h3>
-            <textarea name="issueDescription" rows="3"></textarea>
-          </div>
+          <InputGroupColumn>
+            <HeadingTerciary>Description</HeadingTerciary>
+            <CustomInput as="textarea" type="textarea" name="issueDescription" rows="3" />
+          </InputGroupColumn>
 
-          <button className="submit-form-btn" type="submit">
-            Create issue
-          </button>
+          <CustomButton type="submit">Create issue</CustomButton>
         </form>
       </SidebarModal>
 
       <SidebarModal isOpen={sidebarOpen.sidebar2}>
         <X onClick={toggleSidebar} name="sidebar2" />
 
-        <div className="results-container">
-          <h2 className="heading-secondary">Members</h2>
+        <HeadingSecondary>Members</HeadingSecondary>
 
-          <div className="input-group-column">
-            <input type="search" name="projectSearch" placeholder="Search people" />
-            <div className="search-results-box">
-              <div className="search-result">
-                <div className="profile-info">
-                  <img className="profile-img" src="/img/imgBig1.jpg" alt="Profile" />
-                  <h4 className="profile-name-search">Martin Lednár</h4>
-                </div>
-
-                <Star title="Owner" />
+        <InputGroupColumn>
+          <CustomInput type="search" name="projectSearch" placeholder="Search people" />
+          <div className="search-results-box">
+            <div className="search-result">
+              <div className="profile-info">
+                <ProfileImage className="profile-img" src="/img/imgBig1.jpg" alt="Profile" />
+                <h4 className="profile-name-search">Martin Lednár</h4>
               </div>
+
+              <p title="Owner">
+                <Star />
+              </p>
             </div>
           </div>
-        </div>
+        </InputGroupColumn>
 
-        <div className="results-container">
-          <h2 className="heading-secondary">Invite</h2>
+        <HeadingSecondary>Invite</HeadingSecondary>
 
-          <div className="input-group-column">
-            <input type="search" name="projectSearch" placeholder="Search people" />
-            <div className="search-results-box">
-              <div className="search-result">
-                <div className="profile-info">
-                  <img className="profile-img" src="/img/imgBig1.jpg" alt="Profile" />
-                  <h4 className="profile-name-search">Martin Lednár</h4>
-                </div>
-
-                <p className="search-invite-btn" title="Send invite">
-                  <Send />
-                </p>
+        <InputGroupColumn>
+          <CustomInput type="search" name="projectSearch" placeholder="Search people" />
+          <div className="search-results-box">
+            <div className="search-result">
+              <div className="profile-info">
+                <ProfileImage className="profile-img" src="/img/imgBig1.jpg" alt="Profile" />
+                <h4 className="profile-name-search">Martin Lednár</h4>
               </div>
+
+              <p className="search-invite-btn" title="Send invite">
+                <Send />
+              </p>
             </div>
           </div>
-        </div>
+        </InputGroupColumn>
       </SidebarModal>
 
       <SidebarModal isOpen={sidebarOpen.sidebar3}>
         <X onClick={toggleSidebar} name="sidebar3" />
 
-        <h2 className="heading-secondary">Delete project</h2>
+        <HeadingSecondary>Delete project</HeadingSecondary>
 
         <form action="#" className="modal-form">
-          <div className="input-group-column">
+          <InputGroupColumn>
             <p className="modal-form-text">Be careful this step is irreversible!</p>
 
-            <p className="project-delete-btn">
+            <CustomButton buttonType={CUSTOM_BUTTON_TYPE_CLASSES.red}>
               Delete project
               <Trash2 />
-            </p>
-          </div>
+            </CustomButton>
+          </InputGroupColumn>
         </form>
       </SidebarModal>
 
-      <div className="main-content">
-        <div className="project-wrapper">
+      <MainContentContainer>
+        <ProjectContainer>
           <ArrowLink to="/" linkType={ARROW_LINK_TYPE_CLASSES.arrowLeft}>
             <ChevronLeft />
             Go back
           </ArrowLink>
 
-          <div className="project-heading-box">
-            <h1 className="main-heading">Project: Tara react</h1>
+          <HeadingContainer>
+            <HeadingMain>Project: Tara react</HeadingMain>
 
             <div className="project-action-box">
-              <p className="project-add-btn" onClick={toggleSidebar} name="sidebar1">
+              <CustomButton onClick={toggleSidebar} name="sidebar1">
                 Add
                 <Plus />
-              </p>
+              </CustomButton>
 
-              <p className="project-add-btn" onClick={toggleSidebar} name="sidebar2">
+              <CustomButton onClick={toggleSidebar} name="sidebar2">
                 Invite
                 <UserPlus />
-              </p>
-              <p className="project-add-btn project-delete-btn" onClick={toggleSidebar} name="sidebar3">
+              </CustomButton>
+
+              <CustomButton onClick={toggleSidebar} buttonType={CUSTOM_BUTTON_TYPE_CLASSES.red} name="sidebar3">
                 Delete project
                 <Trash2 />
-              </p>
+              </CustomButton>
             </div>
-          </div>
+          </HeadingContainer>
 
-          <div className="responsive-table">
+          <TableContainer>
             <table>
               <thead>
                 <tr>
@@ -280,9 +290,9 @@ const ProjectPage = () => {
                 </tr>
               </tbody>
             </table>
-          </div>
-        </div>
-      </div>
+          </TableContainer>
+        </ProjectContainer>
+      </MainContentContainer>
     </Fragment>
   );
 };

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import SidebarMain from "../../sidebar/sidebar.component";
+import { MainBoxContainer } from "../../universal-styles";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -12,11 +13,11 @@ const HomePage = () => {
   });
 
   return (
-    <div className="main-box">
+    <MainBoxContainer>
       <SidebarMain />
 
       <Outlet />
-    </div>
+    </MainBoxContainer>
   );
 };
 

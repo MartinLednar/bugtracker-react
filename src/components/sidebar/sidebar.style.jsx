@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { ArrowLinkStatic } from "../arrow-link/arrow-link.style";
+import { CustomButtonGreen } from "../custom-button/custom-button.style";
+import { HeadingSecondary } from "../universal-styles";
 
 const Sidebar = styled.div`
   min-width: 370px;
@@ -31,6 +33,18 @@ export const SidebarMainContainer = styled(Sidebar)`
     }
   }
 
+  .notification {
+    font-size: 1.5rem;
+    color: white;
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    margin-left: 1rem;
+    border-radius: 100%;
+    background-color: var(--color-blue);
+  }
+
   .profile-img {
     width: 10rem;
     height: 10rem;
@@ -42,6 +56,54 @@ export const SidebarMainContainer = styled(Sidebar)`
     font-size: 2.3rem;
     font-family: var(--font-heading);
     font-weight: 500;
+  }
+
+  nav {
+    display: inline-block;
+    margin: 5rem 0 auto;
+  }
+
+  .nav-item {
+    width: max-content;
+    list-style: none;
+    font-weight: 400;
+    font-size: 2.3rem;
+  }
+
+  .nav-item:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  .nav-item:last-child .nav-link {
+    color: var(--color-red);
+  }
+
+  .nav-item:hover a {
+    opacity: 0.6;
+  }
+
+  .author {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 400;
+  }
+
+  .author a {
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    transition: all 0.5s;
+  }
+
+  .author a:hover {
+    color: var(--color-green);
+  }
+
+  .copyright {
+    font-size: 1.8rem;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 0.5rem;
   }
 `;
 
@@ -71,6 +133,89 @@ export const SidebarModal = styled(Sidebar)`
     &:hover {
       color: var(--color-red);
     }
+  }
+
+  .close-modal-btn {
+    display: block;
+    text-align: right;
+    cursor: pointer;
+    min-height: 2.8rem;
+    min-width: 2.8rem;
+    transition: all 0.5s;
+    margin: 0 0 0 auto;
+  }
+
+  .close-modal-btn:hover {
+    color: var(--color-red);
+  }
+
+  ${HeadingSecondary}:not(:first-of-type) {
+    margin-top: 3rem;
+  }
+
+  .profile-info {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .profile-info .profile-img {
+    height: 100%;
+    width: 4.3rem;
+    margin-right: 1rem;
+  }
+
+  .profile-info .profile-name-search {
+    font-weight: 400;
+  }
+
+  .modal-form {
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: visible;
+    scrollbar-width: none;
+
+    ${CustomButtonGreen} {
+      margin: 4rem 0 0 auto;
+    }
+  }
+
+  .search-results-box {
+    margin-top: 1.5rem;
+    max-height: 180px;
+    overflow: hidden;
+    overflow-y: visible;
+    scrollbar-width: thin;
+  }
+
+  #result-box-big {
+    max-height: 360px;
+  }
+
+  .search-result {
+    padding: 0.8rem 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    border-bottom: 1px solid rgb(218, 218, 218);
+  }
+
+  .search-result .search-invite-btn {
+    color: var(--color-green);
+    cursor: pointer;
+  }
+
+  .search-invite-sent-btn {
+    display: flex;
+    align-items: center;
+  }
+
+  .search-invite-sent-btn svg {
+    margin-left: 0.3rem;
   }
 `;
 

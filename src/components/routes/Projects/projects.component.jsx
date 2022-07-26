@@ -1,9 +1,35 @@
 import { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
 import { SidebarModal, SidebarModalShadow } from "../../sidebar/sidebar.style";
-import { ChevronRight, Plus, Users, X } from "react-feather";
-import { ARROW_LINK_TYPE_CLASSES, ArrowLink } from "../../arrow-link/arrow-link.component";
-import "./projects.style.scss";
+import { Plus, X } from "react-feather";
+import ProjectPreview from "../../project-preview/project-preview.component";
+import { CustomButton } from "../../custom-button/custom-button.component";
+import CustomInput from "../../custom-input/custom-input.component";
+import { MainContentContainer, HeadingContainer, HeadingMain, HeadingSecondary, HeadingTerciary, InputGroupColumn } from "../../universal-styles";
+import { ProjectsContainer } from "./projects.style";
+
+export const projectsDummyData = [
+  {
+    id: 121565,
+    title: "Tara react",
+    owner: "Martin Lednár",
+    date: "12.5.2022",
+    users: ["User1", "User2", "User3"],
+  },
+  {
+    id: 123456,
+    title: "Bug tracker",
+    owner: "Martin Lednár",
+    date: "3.4.2022",
+    users: ["User1"],
+  },
+  {
+    id: 654132,
+    title: "To-do react app",
+    owner: "Martin Lednár",
+    date: "3.1.2022",
+    users: ["User1", "User2"],
+  },
+];
 
 const ProjectsPage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -16,51 +42,37 @@ const ProjectsPage = () => {
       <SidebarModal isOpen={sidebarOpen}>
         <X onClick={toggleSidebar} name="sidebar" />
 
-        <h2 className="heading-secondary">New project</h2>
+        <HeadingSecondary>New project</HeadingSecondary>
 
         <form action="#" className="modal-form">
-          <div className="input-group-column">
-            <h3 className="heading-terciary">Name</h3>
-            <input type="text" name="projectName" />
-          </div>
-
-          <button className="submit-form-btn" type="submit">
-            Create project
-          </button>
+          <InputGroupColumn>
+            <HeadingTerciary>Name</HeadingTerciary>
+            <CustomInput type="text" name="projectName" />
+          </InputGroupColumn>
+          <CustomButton type="submit">Create project</CustomButton>
         </form>
       </SidebarModal>
 
-      <div className="main-content" id="no-padding">
-        <div className="projects-wrapper">
-          <div className="project-heading-box">
-            <h1 className="main-heading">My Projects</h1>
+      <MainContentContainer id="no-padding">
+        <ProjectsContainer>
+          <HeadingContainer>
+            <HeadingMain>My Projects</HeadingMain>
 
             <div className="project-action-box">
-              <p className="project-add-btn" onClick={toggleSidebar}>
+              <CustomButton onClick={toggleSidebar}>
                 New
                 <Plus />
-              </p>
+              </CustomButton>
             </div>
-          </div>
+          </HeadingContainer>
 
           <div className="projects-grid">
-            <Link to="/project/156155" className="project-box">
-              <h2 className="project-title">Tara react</h2>
-
-              <h2 className="project-subtitle">Owner: Martin Lednár</h2>
-              <h2 className="project-subtitle">Created: 12.6.2022</h2>
-              <h2 className="project-subtitle">
-                <Users />: 14
-              </h2>
-
-              <ArrowLink as="p" linkType={ARROW_LINK_TYPE_CLASSES.arrowRight}>
-                Go to project
-                <ChevronRight />
-              </ArrowLink>
-            </Link>
+            {projectsDummyData.map((projectData) => (
+              <ProjectPreview key={projectData.id} project={projectData} />
+            ))}
           </div>
-        </div>
-      </div>
+        </ProjectsContainer>
+      </MainContentContainer>
     </Fragment>
   );
 };

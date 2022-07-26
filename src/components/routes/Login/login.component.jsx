@@ -1,9 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./login.style.scss";
+import { HeadingSecondary, HeadingTerciary } from "../../universal-styles.jsx";
+import { CustomButton } from "../../custom-button/custom-button.component";
+import CustomInput from "../../custom-input/custom-input.component.jsx";
+import { LoginContainer } from "./login.style.jsx";
+import { ArrowLink } from "../../arrow-link/arrow-link.component";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+
+  const [loginToggle, setLoginToggle] = useState(true);
+
+  const toggleLoginForm = () => setLoginToggle(!loginToggle);
 
   useEffect(() => {
     if (false) {
@@ -12,55 +20,61 @@ const LoginPage = () => {
   });
 
   return (
-    <div className="login-wrapper">
+    <LoginContainer>
       <div className="login-box">
-        <form className="login-form">
-          <h2 className="heading-secondary">Sign In</h2>
+        {loginToggle ? (
+          <form className="login-form">
+            <HeadingSecondary>Sign In</HeadingSecondary>
 
-          <div className="input-group-column">
-            <h3 className="heading-terciary">Email</h3>
-            <input type="email" name="userMail" />
-          </div>
+            <div className="input-group-column">
+              <HeadingTerciary>Email</HeadingTerciary>
+              <CustomInput type="email" name="userMail" />
+            </div>
 
-          <div className="input-group-column">
-            <h3 className="heading-terciary">Password</h3>
-            <input type="password" name="userPassword" />
-          </div>
+            <div className="input-group-column">
+              <HeadingTerciary>Password</HeadingTerciary>
+              <CustomInput type="password" name="userPassword" />
+            </div>
 
-          <button className="submit-form-btn">Sign In</button>
+            <CustomButton>Sign In</CustomButton>
 
-          <p className="under-login-link under-text-link">Don't have an account? Sign up now!</p>
-        </form>
+            <ArrowLink as="p" linkType="basic" onClick={toggleLoginForm}>
+              Don't have an account? Sign up now!
+            </ArrowLink>
+          </form>
+        ) : (
+          <form className="login-form">
+            <HeadingSecondary>Sign Up</HeadingSecondary>
 
-        {/* <form className="login-form">
-          <h2 className="heading-secondary">Sign Up</h2>
-  
-          <div className="input-group-column">
-            <h3 className="heading-terciary">Name</h3>
-            <input type="text" name="userName" />
-          </div>
-  
-          <div className="input-group-column">
-            <h3 className="heading-terciary">Email</h3>
-            <input type="email" name="userMail" />
-          </div>
-  
-          <div className="input-group-column">
-            <h3 className="heading-terciary">Password</h3>
-            <input type="password" name="userPassword" />
-          </div>
-  
-          <div className="input-group-column">
-            <h3 className="heading-terciary">Confirm Password</h3>
-            <input type="password" name="userPasswordConfirm" />
-          </div>
-  
-          <button className="submit-form-btn">Sign Up</button>
-  
-          <a className="under-login-link under-text-link" href="#">Already have an account? Sign in now!</a>
-        </form>  */}
+            <div className="input-group-column">
+              <HeadingTerciary>Name</HeadingTerciary>
+              <CustomInput type="text" name="userName" />
+            </div>
+
+            <div className="input-group-column">
+              <HeadingTerciary>Email</HeadingTerciary>
+              <CustomInput type="email" name="userMail" />
+            </div>
+
+            <div className="input-group-column">
+              <HeadingTerciary>Password</HeadingTerciary>
+              <CustomInput type="password" name="userPassword" />
+            </div>
+
+            <div className="input-group-column">
+              <HeadingTerciary>Confirm Password</HeadingTerciary>
+              <CustomInput type="password" name="userPasswordConfirm" />
+            </div>
+
+            <CustomButton>Sign Up</CustomButton>
+
+            <ArrowLink as="p" linkType="basic" onClick={toggleLoginForm}>
+              Already have an account? Sign in now!
+            </ArrowLink>
+          </form>
+        )}
       </div>
-    </div>
+    </LoginContainer>
   );
 };
 

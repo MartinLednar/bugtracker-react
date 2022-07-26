@@ -1,15 +1,16 @@
 import { ChevronRight, Tool } from "react-feather";
 import { ARROW_LINK_TYPE_CLASSES, ArrowLink } from "../../arrow-link/arrow-link.component";
 import { Capsule, CAPSULE_STYLE_CLASSES } from "../../capsule/capsule.component";
+import { MainContentContainer, TableContainer, HeadingMain } from "../../universal-styles";
 
 const TasksPage = () => (
-  <div className="main-content">
+  <MainContentContainer>
     <div className="tasks-wrapper">
       <div className="project-heading-box">
-        <h1 className="main-heading">My tasks</h1>
+        <HeadingMain>My tasks</HeadingMain>
       </div>
 
-      <div className="responsive-table">
+      <TableContainer>
         <table>
           <thead>
             <tr>
@@ -46,9 +47,9 @@ const TasksPage = () => (
             </tr>
           </tbody>
         </table>
-      </div>
+      </TableContainer>
     </div>
-  </div>
+  </MainContentContainer>
 );
 
 export default TasksPage;

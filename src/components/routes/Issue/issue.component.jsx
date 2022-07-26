@@ -1,27 +1,30 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ChevronLeft, UserPlus, Check, Tool, Trash2 } from "react-feather";
 import { Capsule, CAPSULE_STYLE_CLASSES } from "../../capsule/capsule.component";
 import { CircleButton, CIRCLE_BUTTON_TYPE_CLASSES } from "../../circle-button/circle-button.component";
-import "./issue.style.scss";
+import { MainContentContainer, HeadingTerciary, TableContainer, HeadingMain, HeadingSecondary, HeadingContainer } from "../../universal-styles";
+import { ArrowLink, ARROW_LINK_TYPE_CLASSES } from "../../arrow-link/arrow-link.component";
+import { CustomButton } from "../../custom-button/custom-button.component";
+import { IssueContainer } from "./issue.style";
 
 const IssuePage = () => {
   const { issueID, projectID } = useParams();
 
   return (
-    <div className="main-content">
-      <div className="issue-wrapper">
-        <Link to={`/project/${projectID}`} className="back-link">
+    <MainContentContainer>
+      <IssueContainer>
+        <ArrowLink to={`/project/${projectID}`} linkType={ARROW_LINK_TYPE_CLASSES.arrowLeft}>
           <ChevronLeft />
           Go back
-        </Link>
+        </ArrowLink>
 
-        <div className="project-heading-box">
+        <HeadingContainer>
           <div className="issue-title-box">
             <div className="issue-title-subbox">
-              <h1 className="heading-terciary">Project: Tara react</h1>
+              <HeadingTerciary>Project: Tara react</HeadingTerciary>
               <h3 className="issue-number">#{issueID}</h3>
             </div>
-            <h1 className="main-heading">Fix heading in Actions section</h1>
+            <HeadingMain>Fix heading in Actions section</HeadingMain>
             <div className="issue-type-box">
               <div className="issue-type-group">
                 <h3>Type:</h3>
@@ -62,18 +65,18 @@ const IssuePage = () => {
               <span className="text-bold">Date:</span> 12.6.2022
             </h2>
           </div>
-        </div>
+        </HeadingContainer>
 
-        <h2 className="heading-secondary">Description</h2>
+        <HeadingSecondary>Description</HeadingSecondary>
         <p className="issue-description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, exercitationem! Quis neque vero mollitia reprehenderit obcaecati, magnam necessitatibus voluptate
-          quasi fuga dicta dolores autem, perspiciatis tenetur laudantium. Consequatur quidem ex illo rerum minima natus, iure molestias rem sed beatae fugiat obcaecati aperiam
-          nam, architecto eaque soluta fugit animi similique sunt!
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, exercitationem! Quis neque vero mollitia reprehenderit obcaecati, magnam
+          necessitatibus voluptate quasi fuga dicta dolores autem, perspiciatis tenetur laudantium. Consequatur quidem ex illo rerum minima natus,
+          iure molestias rem sed beatae fugiat obcaecati aperiam nam, architecto eaque soluta fugit animi similique sunt!
         </p>
 
-        <h2 className="heading-secondary">Workers</h2>
+        <HeadingSecondary>Workers</HeadingSecondary>
 
-        <div className="responsive-table">
+        <TableContainer>
           <table className="issue-table">
             <thead>
               <tr>
@@ -97,21 +100,21 @@ const IssuePage = () => {
               </tr>
             </tbody>
           </table>
-        </div>
+        </TableContainer>
 
-        <h2 className="heading-secondary">Manage Issue</h2>
+        <HeadingSecondary>Manage Issue</HeadingSecondary>
 
         <div className="issue-manage-group">
-          <h3 className="heading-terciary">Close Issue</h3>
+          <HeadingTerciary>Close Issue</HeadingTerciary>
           <p>In case the issue was resolved. Once the issue is closed it can't be re-opened!</p>
 
-          <p className="close-issue-btn">
+          <CustomButton>
             Close issue
             <Check />
-          </p>
+          </CustomButton>
         </div>
-      </div>
-    </div>
+      </IssueContainer>
+    </MainContentContainer>
   );
 };
 

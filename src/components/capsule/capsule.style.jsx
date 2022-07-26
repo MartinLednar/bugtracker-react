@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Capsule = styled.p`
+export const StyledCapsule = styled.p`
   margin: 0 auto;
   border-radius: 50px;
   width: max-content;
@@ -15,22 +15,22 @@ const Capsule = styled.p`
   }
 `;
 
-export const CapsuleGreen = styled(Capsule)`
+export const CapsuleGreen = styled(StyledCapsule)`
   background-color: var(--color-green);
 `;
 
-export const CapsuleRed = styled(Capsule)`
+export const CapsuleRed = styled(StyledCapsule)`
   background-color: var(--color-red);
 `;
 
-export const CapsuleOrange = styled(Capsule)`
+export const CapsuleOrange = styled(StyledCapsule)`
   background-color: var(--color-orange);
 `;
 
-export const CapsuleBlue = styled(Capsule)`
+export const CapsuleBlue = styled(StyledCapsule)`
   background-color: var(--color-blue);
 `;
 
-export const CapsuleYellow = styled(Capsule)`
+export const CapsuleYellow = styled(StyledCapsule)`
   background-color: var(--color-yellow);
 `;

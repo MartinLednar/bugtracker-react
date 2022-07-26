@@ -10,6 +10,7 @@ const StyledArrowLink = styled(Link)`
   transition: all 0.5s;
   display: flex;
   align-items: center;
+  cursor: pointer;
   & svg {
     width: 2rem;
     height: 2rem;

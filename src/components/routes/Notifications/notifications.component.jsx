@@ -1,23 +1,24 @@
 import { X, Check } from "react-feather";
 import { CircleButton, CIRCLE_BUTTON_TYPE_CLASSES } from "../../circle-button/circle-button.component";
-import "./notifications.style.scss";
+import { MainContentContainer, HeadingContainer, HeadingMain, HeadingTerciary, TableContainer, ProfileImage } from "../../universal-styles";
+import { NotificationsContainer } from "./notifications.style";
 
 const NotificationsPage = () => (
-  <div className="main-content">
-    <div className="notifications-wrapper">
-      <div className="project-heading-box">
-        <h1 className="main-heading">Notifications</h1>
-      </div>
+  <MainContentContainer>
+    <NotificationsContainer>
+      <HeadingContainer>
+        <HeadingMain>Notifications</HeadingMain>
+      </HeadingContainer>
 
-      <div className="responsive-table">
+      <TableContainer>
         <table>
           <tbody>
             <tr>
               <td>
                 <div className="notification-msg-box">
                   <div className="notification-sender-box">
-                    <img src="/img/imgBig1.jpg" alt="Profile" className="profile-img" />
-                    <h3 className="heading-terciary">Martin Lednár -</h3>
+                    <ProfileImage src="/img/imgBig1.jpg" alt="Profile" className="profile-img" />
+                    <HeadingTerciary>Martin Lednár -</HeadingTerciary>
                   </div>
 
                   <p>Invited you to project: Tara react</p>
@@ -38,9 +39,9 @@ const NotificationsPage = () => (
             </tr>
           </tbody>
         </table>
-      </div>
-    </div>
-  </div>
+      </TableContainer>
+    </NotificationsContainer>
+  </MainContentContainer>
 );
 
 export default NotificationsPage;
