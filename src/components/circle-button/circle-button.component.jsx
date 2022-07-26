@@ -11,10 +11,8 @@ const selectCircleButton = (buttonStyle) =>
     [CIRCLE_BUTTON_TYPE_CLASSES.red]: CircleButtonRed,
   }[buttonStyle]);
 
-const CircleButton = ({ children, buttonStyle }) => {
+export const CircleButton = ({ children, buttonStyle, ...otherProps }) => {
   const StyledCircleButton = selectCircleButton(buttonStyle);
 
-  return <StyledCircleButton>{children}</StyledCircleButton>;
+  return <StyledCircleButton {...otherProps}>{children}</StyledCircleButton>;
 };
-
-export default CircleButton;

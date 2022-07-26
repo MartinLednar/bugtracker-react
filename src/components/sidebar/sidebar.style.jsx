@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ArrowLinkStatic } from "../arrow-link/arrow-link.style";
 
 const Sidebar = styled.div`
   min-width: 370px;
@@ -20,11 +21,14 @@ export const SidebarMainContainer = styled(Sidebar)`
     align-items: center;
   }
 
-  .profile-text-box .under-text-link svg {
-    height: 2rem;
-    width: 2rem;
-    margin-left: -1px;
-    margin-right: -5px;
+  ${ArrowLinkStatic} {
+    font-size: 1.8rem;
+    margin-top: 0.8rem;
+
+    & svg {
+      margin-left: -1px;
+      margin-right: -5px;
+    }
   }
 
   .profile-img {

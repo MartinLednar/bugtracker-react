@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import { Home, Briefcase, Bell, HelpCircle, LogIn, LogOut, ChevronRight } from "react-feather";
 import CustomNavLink from "../nav-link/nav-link.component";
 import { SidebarMainContainer } from "./sidebar.style";
+import { ARROW_LINK_TYPE_CLASSES, ArrowLink } from "../arrow-link/arrow-link.component";
 
 const SidebarMain = () => (
   <SidebarMainContainer>
@@ -11,10 +11,10 @@ const SidebarMain = () => (
       <div className="profile-text-box">
         <h2 className="profile-name">Martin Lednár</h2>
 
-        <Link to="/profile" className="under-text-link">
+        <ArrowLink to="/profile" linkType={ARROW_LINK_TYPE_CLASSES.basic}>
           View profile
           <ChevronRight />
-        </Link>
+        </ArrowLink>
       </div>
     </div>
 

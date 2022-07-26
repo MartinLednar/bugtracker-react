@@ -1,4 +1,5 @@
 import { X, Check } from "react-feather";
+import { CircleButton, CIRCLE_BUTTON_TYPE_CLASSES } from "../../circle-button/circle-button.component";
 import "./notifications.style.scss";
 
 const NotificationsPage = () => (
@@ -25,13 +26,13 @@ const NotificationsPage = () => (
 
               <td>
                 <div className="notification-action-box">
-                  <p className="issue-action-btn issue-action-btn-green" title="Accept">
+                  <CircleButton buttonStyle={CIRCLE_BUTTON_TYPE_CLASSES.green} title="Accept">
                     <Check />
-                  </p>
+                  </CircleButton>
 
-                  <p className="issue-action-btn issue-action-btn-red" title="Reject">
+                  <CircleButton buttonStyle={CIRCLE_BUTTON_TYPE_CLASSES.red} title="Reject">
                     <X />
-                  </p>
+                  </CircleButton>
                 </div>
               </td>
             </tr>

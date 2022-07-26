@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
 import { ChevronRight, Tool } from "react-feather";
+import { ARROW_LINK_TYPE_CLASSES, ArrowLink } from "../../arrow-link/arrow-link.component";
+import { Capsule, CAPSULE_STYLE_CLASSES } from "../../capsule/capsule.component";
 
 const TasksPage = () => (
   <div className="main-content">
@@ -26,21 +27,21 @@ const TasksPage = () => (
               <td>Fix heading in Actions section</td>
 
               <td>
-                <p className="capsule capsule-orange">
+                <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES.orange}>
                   Fix
                   <Tool />
-                </p>
+                </Capsule>
               </td>
 
               <td>
-                <p className="capsule capsule-red">High</p>
+                <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES.red}>High</Capsule>
               </td>
 
               <td>
-                <Link to="/project/1515151/issue/123456" className="table-link">
+                <ArrowLink to="/project/1515151/issue/123456" linkType={ARROW_LINK_TYPE_CLASSES.arrowRight}>
                   Go to issue
                   <ChevronRight />
-                </Link>
+                </ArrowLink>
               </td>
             </tr>
           </tbody>

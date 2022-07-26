@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronRight, Plus, Users } from "react-feather";
 import { SidebarModal, SidebarModalShadow } from "../../sidebar/sidebar.style";
-import { X } from "react-feather";
+import { ChevronRight, Plus, Users, X } from "react-feather";
+import { ARROW_LINK_TYPE_CLASSES, ArrowLink } from "../../arrow-link/arrow-link.component";
 import "./projects.style.scss";
-import { Fragment } from "react";
 
 const ProjectsPage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -54,10 +53,10 @@ const ProjectsPage = () => {
                 <Users />: 14
               </h2>
 
-              <p className="project-link">
+              <ArrowLink as="p" linkType={ARROW_LINK_TYPE_CLASSES.arrowRight}>
                 Go to project
                 <ChevronRight />
-              </p>
+              </ArrowLink>
             </Link>
           </div>
         </div>

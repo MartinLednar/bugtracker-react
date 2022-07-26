@@ -2,6 +2,9 @@ import { Fragment, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ChevronRight, Plus, Tool, CheckCircle, AlertTriangle, ChevronLeft, Trash2, UserPlus, X, Send, Star } from "react-feather";
 import { SidebarModal, SidebarModalShadow } from "../../sidebar/sidebar.style";
+import { ARROW_LINK_TYPE_CLASSES, ArrowLink } from "../../arrow-link/arrow-link.component";
+import { Capsule, CAPSULE_STYLE_CLASSES } from "../../capsule/capsule.component";
+
 import "./project.style.scss";
 
 const sidebarsInitialState = {
@@ -165,10 +168,11 @@ const ProjectPage = () => {
 
       <div className="main-content">
         <div className="project-wrapper">
-          <Link to="/" className="back-link">
+          <ArrowLink to="/" linkType={ARROW_LINK_TYPE_CLASSES.arrowLeft}>
             <ChevronLeft />
             Go back
-          </Link>
+          </ArrowLink>
+
           <div className="project-heading-box">
             <h1 className="main-heading">Project: Tara react</h1>
 
@@ -177,6 +181,7 @@ const ProjectPage = () => {
                 Add
                 <Plus />
               </p>
+
               <p className="project-add-btn" onClick={toggleSidebar} name="sidebar2">
                 Invite
                 <UserPlus />
@@ -207,22 +212,22 @@ const ProjectPage = () => {
                   <td>1.</td>
                   <td>Fix heading in Actions section</td>
                   <td>
-                    <p className="capsule capsule-orange">
+                    <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES.orange}>
                       Fix
                       <Tool />
-                    </p>
+                    </Capsule>
                   </td>
                   <td>
-                    <p className="capsule capsule-red">High</p>
+                    <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES.red}>High</Capsule>
                   </td>
                   <td>
                     <p style={{ color: "green" }}>Assigned</p>
                   </td>
                   <td>
-                    <Link to={`/project/${projectID}/issue/165151`} className="table-link">
+                    <ArrowLink to={`/project/${projectID}/issue/165151`} linkType={ARROW_LINK_TYPE_CLASSES.arrowRight}>
                       See details
                       <ChevronRight />
-                    </Link>
+                    </ArrowLink>
                   </td>
                 </tr>
 
@@ -230,22 +235,22 @@ const ProjectPage = () => {
                   <td>2.</td>
                   <td>Add background color</td>
                   <td>
-                    <p className="capsule capsule-blue">
+                    <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES.blue}>
                       To-do
                       <CheckCircle />
-                    </p>
+                    </Capsule>
                   </td>
                   <td>
-                    <p className="capsule capsule-green">Low</p>
+                    <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES.green}>Low</Capsule>
                   </td>
                   <td>
                     <p style={{ color: "red" }}>Unassigned</p>
                   </td>
                   <td>
-                    <Link to={`/project/${projectID}/issue/123456`} className="table-link">
+                    <ArrowLink to={`/project/${projectID}/issue/123456`} linkType={ARROW_LINK_TYPE_CLASSES.arrowRight}>
                       See details
                       <ChevronRight />
-                    </Link>
+                    </ArrowLink>
                   </td>
                 </tr>
 
@@ -253,22 +258,24 @@ const ProjectPage = () => {
                   <td>3.</td>
                   <td>Fix heading in Actions section</td>
                   <td>
-                    <p className="capsule capsule-red">
+                    <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES.red}>
                       Bug
                       <AlertTriangle />
-                    </p>
+                    </Capsule>
                   </td>
                   <td>
-                    <p className="capsule capsule-orange">Medium</p>
+                    <p className="capsule capsule-orange"></p>
+
+                    <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES.orange}>Medium</Capsule>
                   </td>
                   <td>
                     <p style={{ color: "green" }}>Closed</p>
                   </td>
                   <td>
-                    <Link to={`/project/${projectID}/issue/515151`} className="table-link">
+                    <ArrowLink to={`/project/${projectID}/issue/515151`} linkType={ARROW_LINK_TYPE_CLASSES.arrowRight}>
                       See details
                       <ChevronRight />
-                    </Link>
+                    </ArrowLink>
                   </td>
                 </tr>
               </tbody>

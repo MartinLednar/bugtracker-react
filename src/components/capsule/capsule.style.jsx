@@ -5,6 +5,7 @@ const Capsule = styled.p`
   border-radius: 50px;
   width: max-content;
   padding: 0.3rem 2rem;
+  font-weight: 400;
   display: flex;
   align-items: center;
   color: white;

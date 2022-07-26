@@ -15,9 +15,7 @@ const selectCapsuleType = (capsuleStyle) =>
     [CAPSULE_STYLE_CLASSES.orange]: CapsuleOrange,
   }[capsuleStyle]);
 
-const Capsule = ({ children, capsuleStyle = "blue" }) => {
+export const Capsule = ({ children, capsuleStyle = "blue" }) => {
   const StyledCapsule = selectCapsuleType(capsuleStyle);
   return <StyledCapsule>{children}</StyledCapsule>;
 };
-
-export default Capsule;

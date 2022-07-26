@@ -1,5 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { ChevronLeft, UserPlus, Check, Tool, Trash2 } from "react-feather";
+import { Capsule, CAPSULE_STYLE_CLASSES } from "../../capsule/capsule.component";
+import { CircleButton, CIRCLE_BUTTON_TYPE_CLASSES } from "../../circle-button/circle-button.component";
 import "./issue.style.scss";
 
 const IssuePage = () => {
@@ -23,28 +25,32 @@ const IssuePage = () => {
             <div className="issue-type-box">
               <div className="issue-type-group">
                 <h3>Type:</h3>
-                <p className="capsule capsule-orange">
+
+                <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES.orange}>
                   Fix
                   <Tool />
-                </p>
+                </Capsule>
               </div>
 
               <div className="issue-type-group">
                 <h3>Priority:</h3>
-                <p className="capsule capsule-red">High</p>
+
+                <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES.red}>High</Capsule>
               </div>
 
-              <p className="issue-action-btn issue-action-btn-green" title="Join">
+              <CircleButton buttonStyle={CIRCLE_BUTTON_TYPE_CLASSES.green} title="Join">
                 <UserPlus />
-              </p>
+              </CircleButton>
 
-              {/* <p className="issue-action-btn issue-action-btn-red" title="Leave">
-                <UserMinus />
-              </p> */}
+              {
+                //<CircleButton buttonStyle={CIRCLE_BUTTON_TYPE_CLASSES.red} title="Join">
+                //<UserMinus />
+                //</CircleButton>
+              }
 
-              <p className="issue-action-btn issue-action-btn-red" title="Delete issue">
+              <CircleButton buttonStyle={CIRCLE_BUTTON_TYPE_CLASSES.red} title="Delete issue">
                 <Trash2 />
-              </p>
+              </CircleButton>
             </div>
           </div>
 
@@ -60,9 +66,9 @@ const IssuePage = () => {
 
         <h2 className="heading-secondary">Description</h2>
         <p className="issue-description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, exercitationem! Quis neque vero mollitia reprehenderit obcaecati, magnam
-          necessitatibus voluptate quasi fuga dicta dolores autem, perspiciatis tenetur laudantium. Consequatur quidem ex illo rerum minima natus,
-          iure molestias rem sed beatae fugiat obcaecati aperiam nam, architecto eaque soluta fugit animi similique sunt!
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, exercitationem! Quis neque vero mollitia reprehenderit obcaecati, magnam necessitatibus voluptate
+          quasi fuga dicta dolores autem, perspiciatis tenetur laudantium. Consequatur quidem ex illo rerum minima natus, iure molestias rem sed beatae fugiat obcaecati aperiam
+          nam, architecto eaque soluta fugit animi similique sunt!
         </p>
 
         <h2 className="heading-secondary">Workers</h2>
