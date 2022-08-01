@@ -6,6 +6,7 @@ export const StyledNavLink = styled(Link)`
   color: ${({ linkdanger }) => (linkdanger ? "var(--color-red)" : "black")};
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   & svg {
     margin-right: 1rem;

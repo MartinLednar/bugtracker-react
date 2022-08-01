@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { CapsuleBlue, StyledCapsule } from "../../capsule/capsule.style";
+import { StyledCapsule } from "../../capsule/capsule.style";
 import { CircleButtonGreen } from "../../circle-button/circle-button.style";
 import { CustomButtonGreen } from "../../custom-button/custom-button.style";
 import { HeadingContainer, HeadingTerciary, TableContainer } from "../../universal-styles";

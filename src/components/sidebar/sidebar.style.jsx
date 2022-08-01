@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { ArrowLinkStatic } from "../arrow-link/arrow-link.style";
 import { CustomButtonGreen } from "../custom-button/custom-button.style";
+import { StyledNavLink } from "../nav-link/nav-link.style";
 import { HeadingSecondary } from "../universal-styles";
 
 const Sidebar = styled.div`
@@ -78,7 +79,7 @@ export const SidebarMainContainer = styled(Sidebar)`
     color: var(--color-red);
   }
 
-  .nav-item:hover a {
+  .nav-item:hover ${StyledNavLink} {
     opacity: 0.6;
   }
 

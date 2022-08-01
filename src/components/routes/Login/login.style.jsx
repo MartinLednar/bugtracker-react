@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { HeadingSecondary, HeadingTerciary } from "../../universal-styles";
+import { HeadingSecondary, HeadingTerciary, InputGroupColumn } from "../../universal-styles";
 import { CustomButtonGreen } from "../../custom-button/custom-button.style";
 import { ArrowLinkStatic } from "../../arrow-link/arrow-link.style";
 
@@ -33,21 +33,21 @@ export const LoginContainer = styled.div`
     border-radius: 3px;
     padding: 1.3rem 3rem 2rem;
     border: 1px solid rgb(200, 200, 200);
-  }
 
-  .login-form ${HeadingTerciary} {
-    margin-bottom: 0.8rem;
-  }
+    ${HeadingTerciary} {
+      margin-bottom: 0.8rem;
+    }
 
-  .login-form .input-group-column:first-child {
-    margin-top: 0;
-  }
+    ${InputGroupColumn}:first-of-type {
+      margin-top: 2.5rem;
+    }
 
-  .login-form ${CustomButtonGreen} {
-    margin-top: 2rem;
-    margin-left: 0;
-    width: 100%;
-    justify-content: center;
+    ${CustomButtonGreen} {
+      margin-top: 2rem;
+      margin-left: 0;
+      width: 100%;
+      justify-content: center;
+    }
   }
 
   ${ArrowLinkStatic} {

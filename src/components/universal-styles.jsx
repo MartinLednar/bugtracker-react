@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { ArrowLinkRight } from "./arrow-link/arrow-link.style";
-import { CustomButtonGreen, StyledCustomButton } from "./custom-button/custom-button.style";
+import { StyledCustomButton } from "./custom-button/custom-button.style";
 import { StyledCustomInput } from "./custom-input/custom-input.style";
 
 //HEADINGS

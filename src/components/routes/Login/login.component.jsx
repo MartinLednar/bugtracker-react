@@ -1,40 +1,68 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { HeadingSecondary, HeadingTerciary } from "../../universal-styles.jsx";
+import { useState } from "react";
+import { HeadingSecondary, HeadingTerciary, InputGroupColumn } from "../../universal-styles.jsx";
 import { CustomButton } from "../../custom-button/custom-button.component";
 import CustomInput from "../../custom-input/custom-input.component.jsx";
 import { LoginContainer } from "./login.style.jsx";
 import { ArrowLink } from "../../arrow-link/arrow-link.component";
+import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword } from "../../../utils/firebase/firebase.utils.js";
+
+const loginFormInitialState = {
+  mail: "",
+  password: "",
+};
+
+const registerFormInitialState = {
+  displayName: "",
+  mail: "",
+  password: "",
+  passwordConfirm: "",
+};
 
 const LoginPage = () => {
-  const navigate = useNavigate();
-
   const [loginToggle, setLoginToggle] = useState(true);
+  const [loginForm, setLoginForm] = useState(loginFormInitialState);
+  const [registerForm, setregisterForm] = useState(registerFormInitialState);
 
   const toggleLoginForm = () => setLoginToggle(!loginToggle);
 
-  useEffect(() => {
-    if (false) {
-      return navigate("/");
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (loginToggle) {
+      setLoginForm({ ...loginForm, [name]: value });
+    } else {
+      setregisterForm({ ...registerForm, [name]: value });
     }
-  });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (loginToggle) {
+      await signInAuthUserWithEmailAndPassword(loginForm.mail, loginForm.password);
+    } else {
+      const { user } = await createAuthUserWithEmailAndPassword(registerForm.mail, registerForm.password);
+
+      await createUserDocumentFromAuth(user, { displayName: registerForm.displayName });
+    }
+  };
 
   return (
     <LoginContainer>
       <div className="login-box">
         {loginToggle ? (
-          <form className="login-form">
+          <form className="login-form" onSubmit={handleSubmit}>
             <HeadingSecondary>Sign In</HeadingSecondary>
 
-            <div className="input-group-column">
+            <InputGroupColumn>
               <HeadingTerciary>Email</HeadingTerciary>
-              <CustomInput type="email" name="userMail" />
-            </div>
+              <CustomInput type="email" name="mail" onChange={handleChange} value={loginForm.mail} />
+            </InputGroupColumn>
 
-            <div className="input-group-column">
+            <InputGroupColumn>
               <HeadingTerciary>Password</HeadingTerciary>
-              <CustomInput type="password" name="userPassword" />
-            </div>
+              <CustomInput type="password" name="password" onChange={handleChange} value={loginForm.password} />
+            </InputGroupColumn>
 
             <CustomButton>Sign In</CustomButton>
 
@@ -43,28 +71,28 @@ const LoginPage = () => {
             </ArrowLink>
           </form>
         ) : (
-          <form className="login-form">
+          <form className="login-form" onSubmit={handleSubmit}>
             <HeadingSecondary>Sign Up</HeadingSecondary>
 
-            <div className="input-group-column">
+            <InputGroupColumn>
               <HeadingTerciary>Name</HeadingTerciary>
-              <CustomInput type="text" name="userName" />
-            </div>
+              <CustomInput type="text" name="displayName" onChange={handleChange} value={registerForm.displayName} />
+            </InputGroupColumn>
 
-            <div className="input-group-column">
+            <InputGroupColumn>
               <HeadingTerciary>Email</HeadingTerciary>
-              <CustomInput type="email" name="userMail" />
-            </div>
+              <CustomInput type="email" name="mail" onChange={handleChange} value={registerForm.mail} />
+            </InputGroupColumn>
 
-            <div className="input-group-column">
+            <InputGroupColumn>
               <HeadingTerciary>Password</HeadingTerciary>
-              <CustomInput type="password" name="userPassword" />
-            </div>
+              <CustomInput type="password" name="password" onChange={handleChange} value={registerForm.password} />
+            </InputGroupColumn>
 
-            <div className="input-group-column">
+            <InputGroupColumn>
               <HeadingTerciary>Confirm Password</HeadingTerciary>
-              <CustomInput type="password" name="userPasswordConfirm" />
-            </div>
+              <CustomInput type="password" name="passwordConfirm" onChange={handleChange} value={registerForm.passwordConfirm} />
+            </InputGroupColumn>
 
             <CustomButton>Sign Up</CustomButton>
 
