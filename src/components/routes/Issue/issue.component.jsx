@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { ChevronLeft, UserPlus, Check, Tool, Trash2 } from "react-feather";
+import { ChevronLeft, UserPlus, Check, Tool, Trash2, Unlock } from "react-feather";
 import { Capsule, CAPSULE_STYLE_CLASSES } from "../../capsule/capsule.component";
 import { CircleButton, CIRCLE_BUTTON_TYPE_CLASSES } from "../../circle-button/circle-button.component";
 import { MainContentContainer, HeadingTerciary, TableContainer, HeadingMain, HeadingSecondary, HeadingContainer } from "../../universal-styles";
@@ -9,6 +9,7 @@ import { IssueContainer } from "./issue.style";
 
 import { useSelector } from "react-redux";
 import { selectIssue } from "../../../store/slices/user-slice/user.selector";
+import { Fragment } from "react";
 
 const IssuePage = () => {
   const { issueID, projectID } = useParams();
@@ -106,13 +107,31 @@ const IssuePage = () => {
         }
 
         <div className="issue-manage-group">
-          <HeadingTerciary>Close Issue</HeadingTerciary>
-          <p>In case the issue was resolved. Once the issue is closed it can't be re-opened!</p>
+          {issue ? (
+            issue.closed ? (
+              <Fragment>
+                <HeadingTerciary>Re-open Issue</HeadingTerciary>
+                <p>In case the issue wasn't fixed.</p>
 
-          <CustomButton>
-            Close issue
-            <Check />
-          </CustomButton>
+                <CustomButton>
+                  Re-open issue
+                  <Unlock />
+                </CustomButton>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <HeadingTerciary>Close Issue</HeadingTerciary>
+                <p>In case the issue was resolved.</p>
+
+                <CustomButton>
+                  Close issue
+                  <Check />
+                </CustomButton>
+              </Fragment>
+            )
+          ) : (
+            ""
+          )}
         </div>
       </IssueContainer>
     </MainContentContainer>

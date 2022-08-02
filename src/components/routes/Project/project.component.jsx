@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { ChevronRight, Plus, Tool, CheckCircle, AlertTriangle, ChevronLeft, Trash2, UserPlus, X, Send, Star } from "react-feather";
+import { ChevronRight, Plus, Tool, CheckCircle, AlertTriangle, ChevronLeft, Trash2, UserPlus, X, Send, Star, Lock, Unlock } from "react-feather";
 import { SidebarModal, SidebarModalShadow } from "../../sidebar/sidebar.style";
 import { ARROW_LINK_TYPE_CLASSES, ArrowLink } from "../../arrow-link/arrow-link.component";
 import CustomInput from "../../custom-input/custom-input.component";
@@ -245,7 +245,17 @@ const ProjectPage = () => {
                       <td>
                         <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES[issue.priority]} />
                       </td>
-                      <td>{issue.closed ? <p style={{ color: "red" }}>CLOSED</p> : <p style={{ color: "green" }}>OPENED</p>}</td>
+                      <td>
+                        {issue.closed ? (
+                          <span title="Closed">
+                            <Lock style={{ color: "red" }} />
+                          </span>
+                        ) : (
+                          <span title="Closed">
+                            <Unlock style={{ color: "green" }} />
+                          </span>
+                        )}
+                      </td>
                       <td>
                         <ArrowLink to={`/project/${projectID}/issue/${issue.id}`} linkType={ARROW_LINK_TYPE_CLASSES.arrowRight}>
                           See details
