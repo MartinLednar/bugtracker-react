@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { StyledCapsule } from "../../capsule/capsule.style";
-import { CircleButtonGreen } from "../../circle-button/circle-button.style";
+import { CircleButton } from "../../circle-button/circle-button.style";
 import { CustomButtonGreen } from "../../custom-button/custom-button.style";
 import { HeadingContainer, HeadingTerciary, TableContainer } from "../../universal-styles";
 
@@ -74,9 +74,9 @@ export const IssueContainer = styled.div`
     font-family: var(--font-text);
   }
 
-  .issue-type-box ${CircleButtonGreen} {
+  .issue-type-box ${CircleButton} {
     margin-left: auto;
-    margin-right: 1rem;
+    /* margin-right: 1rem; */
   }
 
   .issue-description {

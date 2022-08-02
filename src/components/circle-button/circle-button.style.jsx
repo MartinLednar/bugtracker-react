@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const CircleButton = styled.button`
+export const CircleButton = styled.button`
   cursor: pointer;
   background-color: transparent;
   display: flex;

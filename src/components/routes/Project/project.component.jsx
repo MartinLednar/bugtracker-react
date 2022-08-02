@@ -1,5 +1,6 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { ChevronRight, Plus, Tool, CheckCircle, AlertTriangle, ChevronLeft, Trash2, UserPlus, X, Send, Star } from "react-feather";
 import { SidebarModal, SidebarModalShadow } from "../../sidebar/sidebar.style";
 import { ARROW_LINK_TYPE_CLASSES, ArrowLink } from "../../arrow-link/arrow-link.component";
@@ -20,6 +21,8 @@ import {
 } from "../../universal-styles";
 import { ProjectContainer } from "./project.style";
 
+import { selectProject } from "../../../store/slices/user-slice/user.selector";
+
 const sidebarsInitialState = {
   sidebar1: false,
   sidebar2: false,
@@ -28,7 +31,12 @@ const sidebarsInitialState = {
 
 const ProjectPage = () => {
   const { projectID } = useParams();
+  const { title, issues = [], users = [] } = useSelector((state) => selectProject(state, projectID));
   const [sidebarOpen, setSidebarOpen] = useState(sidebarsInitialState);
+
+  const newIssuesArr = [...issues];
+
+  const sortIssues = (a, b) => (a.closed && !b.closed ? 1 : b.closed && !a.closed ? -1 : 0);
 
   const toggleSidebar = (e) => {
     const name = e.currentTarget.getAttribute("name");
@@ -124,18 +132,26 @@ const ProjectPage = () => {
         <HeadingSecondary>Members</HeadingSecondary>
 
         <InputGroupColumn>
-          <CustomInput type="search" name="projectSearch" placeholder="Search people" />
+          {
+            //<CustomInput type="search" name="projectSearch" placeholder="Search people" />
+          }
           <div className="search-results-box">
-            <div className="search-result">
-              <div className="profile-info">
-                <ProfileImage className="profile-img" src="/img/imgBig1.jpg" alt="Profile" />
-                <h4 className="profile-name-search">Martin Lednár</h4>
-              </div>
+            {users.map((user, index) => (
+              <div key={index} className="search-result">
+                <div className="profile-info">
+                  <ProfileImage className="profile-img" src="/img/imgBig1.jpg" alt="Profile" />
+                  <h4 className="profile-name-search">{user.displayName}</h4>
+                </div>
 
-              <p title="Owner">
-                <Star />
-              </p>
-            </div>
+                {user.role === "owner" ? (
+                  <p title="Owner">
+                    <Star />
+                  </p>
+                ) : (
+                  "Obyc"
+                )}
+              </div>
+            ))}
           </div>
         </InputGroupColumn>
 
@@ -183,7 +199,7 @@ const ProjectPage = () => {
           </ArrowLink>
 
           <HeadingContainer>
-            <HeadingMain>Project: Tara react</HeadingMain>
+            <HeadingMain>Project: {title}</HeadingMain>
 
             <div className="project-action-box">
               <CustomButton onClick={toggleSidebar} name="sidebar1">
@@ -207,7 +223,7 @@ const ProjectPage = () => {
             <table>
               <thead>
                 <tr>
-                  <th>Number</th>
+                  <th>#</th>
                   <th>Name</th>
                   <th>Type</th>
 
@@ -218,76 +234,26 @@ const ProjectPage = () => {
               </thead>
 
               <tbody>
-                <tr>
-                  <td>1.</td>
-                  <td>Fix heading in Actions section</td>
-                  <td>
-                    <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES.orange}>
-                      Fix
-                      <Tool />
-                    </Capsule>
-                  </td>
-                  <td>
-                    <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES.red}>High</Capsule>
-                  </td>
-                  <td>
-                    <p style={{ color: "green" }}>Assigned</p>
-                  </td>
-                  <td>
-                    <ArrowLink to={`/project/${projectID}/issue/165151`} linkType={ARROW_LINK_TYPE_CLASSES.arrowRight}>
-                      See details
-                      <ChevronRight />
-                    </ArrowLink>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>2.</td>
-                  <td>Add background color</td>
-                  <td>
-                    <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES.blue}>
-                      To-do
-                      <CheckCircle />
-                    </Capsule>
-                  </td>
-                  <td>
-                    <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES.green}>Low</Capsule>
-                  </td>
-                  <td>
-                    <p style={{ color: "red" }}>Unassigned</p>
-                  </td>
-                  <td>
-                    <ArrowLink to={`/project/${projectID}/issue/123456`} linkType={ARROW_LINK_TYPE_CLASSES.arrowRight}>
-                      See details
-                      <ChevronRight />
-                    </ArrowLink>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>3.</td>
-                  <td>Fix heading in Actions section</td>
-                  <td>
-                    <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES.red}>
-                      Bug
-                      <AlertTriangle />
-                    </Capsule>
-                  </td>
-                  <td>
-                    <p className="capsule capsule-orange"></p>
-
-                    <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES.orange}>Medium</Capsule>
-                  </td>
-                  <td>
-                    <p style={{ color: "green" }}>Closed</p>
-                  </td>
-                  <td>
-                    <ArrowLink to={`/project/${projectID}/issue/515151`} linkType={ARROW_LINK_TYPE_CLASSES.arrowRight}>
-                      See details
-                      <ChevronRight />
-                    </ArrowLink>
-                  </td>
-                </tr>
+                {newIssuesArr &&
+                  newIssuesArr.sort(sortIssues).map((issue, index) => (
+                    <tr key={issue.id}>
+                      <td>{index + 1}.</td>
+                      <td>{issue.title}</td>
+                      <td>
+                        <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES[issue.type]} />
+                      </td>
+                      <td>
+                        <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES[issue.priority]} />
+                      </td>
+                      <td>{issue.closed ? <p style={{ color: "red" }}>CLOSED</p> : <p style={{ color: "green" }}>OPENED</p>}</td>
+                      <td>
+                        <ArrowLink to={`/project/${projectID}/issue/${issue.id}`} linkType={ARROW_LINK_TYPE_CLASSES.arrowRight}>
+                          See details
+                          <ChevronRight />
+                        </ArrowLink>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </TableContainer>

@@ -12,7 +12,7 @@ import { selectCurrentUser } from "../../../store/slices/user-slice/user.selecto
 import { addProject } from "../../../utils/firebase/firebase.utils";
 
 const ProjectsPage = () => {
-  const { id = "", projects = [], displayName = "" } = useSelector(selectCurrentUser);
+  const { id, projects = [], displayName } = useSelector(selectCurrentUser);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [projectName, setProjectName] = useState("");
 

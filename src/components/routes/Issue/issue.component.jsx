@@ -7,8 +7,12 @@ import { ArrowLink, ARROW_LINK_TYPE_CLASSES } from "../../arrow-link/arrow-link.
 import { CustomButton } from "../../custom-button/custom-button.component";
 import { IssueContainer } from "./issue.style";
 
+import { useSelector } from "react-redux";
+import { selectIssue } from "../../../store/slices/user-slice/user.selector";
+
 const IssuePage = () => {
   const { issueID, projectID } = useParams();
+  const { issue, projectTitle } = useSelector((state) => selectIssue(state, { projectID, issueID }));
 
   return (
     <MainContentContainer>
@@ -21,29 +25,28 @@ const IssuePage = () => {
         <HeadingContainer>
           <div className="issue-title-box">
             <div className="issue-title-subbox">
-              <HeadingTerciary>Project: Tara react</HeadingTerciary>
+              <HeadingTerciary>Project: {projectTitle}</HeadingTerciary>
               <h3 className="issue-number">#{issueID}</h3>
             </div>
-            <HeadingMain>Fix heading in Actions section</HeadingMain>
+            <HeadingMain>{issue && issue.title}</HeadingMain>
             <div className="issue-type-box">
               <div className="issue-type-group">
                 <h3>Type:</h3>
 
-                <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES.orange}>
-                  Fix
-                  <Tool />
-                </Capsule>
+                <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES[issue ? issue.type : "fix"]} />
               </div>
 
               <div className="issue-type-group">
                 <h3>Priority:</h3>
 
-                <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES.red}>High</Capsule>
+                <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES[issue ? issue.priority : "low"]} />
               </div>
 
-              <CircleButton buttonStyle={CIRCLE_BUTTON_TYPE_CLASSES.green} title="Join">
-                <UserPlus />
-              </CircleButton>
+              {
+                //   <CircleButton buttonStyle={CIRCLE_BUTTON_TYPE_CLASSES.green} title="Join">
+                //   <UserPlus />
+                // </CircleButton>
+              }
 
               {
                 //<CircleButton buttonStyle={CIRCLE_BUTTON_TYPE_CLASSES.red} title="Join">
@@ -69,40 +72,38 @@ const IssuePage = () => {
 
         <HeadingSecondary>Description</HeadingSecondary>
         <p className="issue-description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, exercitationem! Quis neque vero mollitia reprehenderit obcaecati, magnam
-          necessitatibus voluptate quasi fuga dicta dolores autem, perspiciatis tenetur laudantium. Consequatur quidem ex illo rerum minima natus,
-          iure molestias rem sed beatae fugiat obcaecati aperiam nam, architecto eaque soluta fugit animi similique sunt!
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, exercitationem! Quis neque vero mollitia reprehenderit obcaecati, magnam necessitatibus voluptate
+          quasi fuga dicta dolores autem, perspiciatis tenetur laudantium. Consequatur quidem ex illo rerum minima natus, iure molestias rem sed beatae fugiat obcaecati aperiam
+          nam, architecto eaque soluta fugit animi similique sunt!
         </p>
 
-        <HeadingSecondary>Workers</HeadingSecondary>
-
-        <TableContainer>
-          <table className="issue-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Mail</th>
-                <th>Joined</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td>Jessi Lednárová</td>
-                <td>jessi.lednarova@gmail.com</td>
-                <td>14.6.2022</td>
-              </tr>
-
-              <tr>
-                <td>Lucka Lednárová</td>
-                <td>lucka.lednarova@gmail.com</td>
-                <td>18.6.2022</td>
-              </tr>
-            </tbody>
-          </table>
-        </TableContainer>
-
-        <HeadingSecondary>Manage Issue</HeadingSecondary>
+        {
+          //   <HeadingSecondary>Workers</HeadingSecondary>
+          // <TableContainer>
+          //   <table className="issue-table">
+          //     <thead>
+          //       <tr>
+          //         <th>Name</th>
+          //         <th>Mail</th>
+          //         <th>Joined</th>
+          //       </tr>
+          //     </thead>
+          //     <tbody>
+          //       <tr>
+          //         <td>Jessi Lednárová</td>
+          //         <td>jessi.lednarova@gmail.com</td>
+          //         <td>14.6.2022</td>
+          //       </tr>
+          //       <tr>
+          //         <td>Lucka Lednárová</td>
+          //         <td>lucka.lednarova@gmail.com</td>
+          //         <td>18.6.2022</td>
+          //       </tr>
+          //     </tbody>
+          //   </table>
+          // </TableContainer>
+          // <HeadingSecondary>Manage Issue</HeadingSecondary>
+        }
 
         <div className="issue-manage-group">
           <HeadingTerciary>Close Issue</HeadingTerciary>
