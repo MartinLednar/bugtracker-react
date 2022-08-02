@@ -1,4 +1,5 @@
 import { Fragment, useState } from "react";
+import { useSelector } from "react-redux";
 import { SidebarModal, SidebarModalShadow } from "../../sidebar/sidebar.style";
 import { Plus, X } from "react-feather";
 import ProjectPreview from "../../project-preview/project-preview.component";
@@ -7,34 +8,44 @@ import CustomInput from "../../custom-input/custom-input.component";
 import { MainContentContainer, HeadingContainer, HeadingMain, HeadingSecondary, HeadingTerciary, InputGroupColumn } from "../../universal-styles";
 import { ProjectsContainer } from "./projects.style";
 
-export const projectsDummyData = [
-  {
-    id: 121565,
-    title: "Tara react",
-    owner: "Martin Lednár",
-    date: "12.5.2022",
-    users: ["User1", "User2", "User3"],
-  },
-  {
-    id: 123456,
-    title: "Bug tracker",
-    owner: "Martin Lednár",
-    date: "3.4.2022",
-    users: ["User1"],
-  },
-  {
-    id: 654132,
-    title: "To-do react app",
-    owner: "Martin Lednár",
-    date: "3.1.2022",
-    users: ["User1", "User2"],
-  },
-];
+import { selectCurrentUser } from "../../../store/slices/user-slice/user.selector";
+import { addProject } from "../../../utils/firebase/firebase.utils";
 
 const ProjectsPage = () => {
+  const { id = "", projects = [], displayName = "" } = useSelector(selectCurrentUser);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [projectName, setProjectName] = useState("");
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+
+  const handleChange = (e) => setProjectName(e.target.value);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const isCreated = projects.some((project) => project.title === projectName);
+
+    if (isCreated) {
+      setProjectName("");
+    } else {
+      const newProjectData = {
+        id: new Date().getTime(),
+        title: projectName,
+        owner: displayName,
+        created: new Date().toLocaleDateString(),
+        users: [
+          {
+            id: 1,
+            role: "owner",
+            displayName,
+          },
+        ],
+      };
+      addProject(id, [...projects, newProjectData]);
+      setSidebarOpen(false);
+      setProjectName("");
+    }
+  };
 
   return (
     <Fragment>
@@ -44,10 +55,10 @@ const ProjectsPage = () => {
 
         <HeadingSecondary>New project</HeadingSecondary>
 
-        <form action="#" className="modal-form">
+        <form onSubmit={handleSubmit} className="modal-form">
           <InputGroupColumn>
             <HeadingTerciary>Name</HeadingTerciary>
-            <CustomInput type="text" name="projectName" />
+            <CustomInput type="text" name="projectName" onChange={handleChange} value={projectName} />
           </InputGroupColumn>
           <CustomButton type="submit">Create project</CustomButton>
         </form>
@@ -67,7 +78,7 @@ const ProjectsPage = () => {
           </HeadingContainer>
 
           <div className="projects-grid">
-            {projectsDummyData.map((projectData) => (
+            {projects.map((projectData) => (
               <ProjectPreview key={projectData.id} project={projectData} />
             ))}
           </div>

@@ -7,7 +7,7 @@ const ProjectPreview = ({ project }) => (
     <h2 className="project-title">{project.title}</h2>
 
     <h2 className="project-subtitle">Owner: {project.owner}</h2>
-    <h2 className="project-subtitle">Created: {project.date}</h2>
+    <h2 className="project-subtitle">Created: {project.created}</h2>
     <h2 className="project-subtitle">
       <Users />: {project.users.length}
     </h2>

@@ -1,12 +1,11 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux/es/exports";
 import { setCurrentUser } from "./store/slices/user-slice/user.slice";
 import LogoLink from "./components/logo-link/logo-link.component";
 import "./App.css";
-
-import { createUserDocumentFromAuth } from "./utils/firebase/firebase.utils";
-
+import { doc, onSnapshot } from "firebase/firestore";
+import { createUserDocumentFromAuth, firestore } from "./utils/firebase/firebase.utils";
 import { onAuthStateChangedListener } from "./utils/firebase/firebase.utils";
 
 //MAIN PAGES
@@ -26,17 +25,22 @@ import TasksPage from "./components/routes/Tasks/tasks.component";
 
 function App() {
   const dispatch = useDispatch();
+  const userUnubscribeRef = useRef();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener(async (userAuth) => {
       if (userAuth) {
-        const userData = await createUserDocumentFromAuth(userAuth);
-        return dispatch(setCurrentUser(userData.data()));
+        const userId = await createUserDocumentFromAuth(userAuth);
+        userUnubscribeRef.current = onSnapshot(doc(firestore, "users", userId), (userDoc) => dispatch(setCurrentUser(userDoc.data())));
+      } else {
+        dispatch(setCurrentUser(userAuth));
       }
-      dispatch(setCurrentUser(userAuth));
     });
 
-    return () => unsubscribe();
+    return () => {
+      userUnubscribeRef.current?.();
+      unsubscribe();
+    };
   });
 
   return (

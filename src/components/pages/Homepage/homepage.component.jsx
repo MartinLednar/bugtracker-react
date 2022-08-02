@@ -13,8 +13,6 @@ const HomePage = () => {
   const location = useLocation();
   const currentUser = useSelector(selectCurrentUser);
 
-  console.log(currentUser);
-
   useEffect(() => {
     if (!currentUser && location.pathname !== "/") {
       return navigate("/");

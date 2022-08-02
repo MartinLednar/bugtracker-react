@@ -5,7 +5,7 @@ import { StyledNavLink } from "../nav-link/nav-link.style";
 import { HeadingSecondary } from "../universal-styles";
 
 const Sidebar = styled.div`
-  min-width: 370px;
+  width: 370px;
   min-height: 500px;
   border: 1px solid rgb(200, 200, 200);
   border-bottom: none;

@@ -177,7 +177,7 @@ const ProjectPage = () => {
 
       <MainContentContainer>
         <ProjectContainer>
-          <ArrowLink to="/" linkType={ARROW_LINK_TYPE_CLASSES.arrowLeft}>
+          <ArrowLink to="/projects" linkType={ARROW_LINK_TYPE_CLASSES.arrowLeft}>
             <ChevronLeft />
             Go back
           </ArrowLink>

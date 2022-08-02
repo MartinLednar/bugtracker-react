@@ -1,10 +1,14 @@
+import { useSelector } from "react-redux";
 import { Home, Briefcase, Bell, HelpCircle, LogIn, LogOut, ChevronRight } from "react-feather";
 import CustomNavLink from "../nav-link/nav-link.component";
 import { SidebarMainContainer } from "./sidebar.style";
 import { ARROW_LINK_TYPE_CLASSES, ArrowLink } from "../arrow-link/arrow-link.component";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 
+import { selectCurrentUser } from "../../store/slices/user-slice/user.selector";
+
 const SidebarMain = () => {
+  const { displayName = "" } = useSelector(selectCurrentUser);
   const handleClick = () => signOutUser();
 
   return (
@@ -13,7 +17,7 @@ const SidebarMain = () => {
         <img className="profile-img" src="/img/basicProfile.svg" alt="Profile" />
 
         <div className="profile-text-box">
-          <h2 className="profile-name">Martin Lednár</h2>
+          <h2 className="profile-name">{displayName}</h2>
 
           <ArrowLink to="/profile" linkType={ARROW_LINK_TYPE_CLASSES.basic}>
             View profile

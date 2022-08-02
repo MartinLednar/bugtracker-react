@@ -32,6 +32,8 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
           id: docRef.id,
           email,
           createdAt,
+          projects: [],
+          tasks: [],
           ...additionalInformation,
         });
       } catch (error) {
@@ -39,7 +41,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInformation
       }
     }
 
-    return docSnap;
+    return docRef.id;
   }
 };
 //CREATE DOC IN DB
@@ -68,28 +70,10 @@ export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth,
 export const signOutUser = async () => signOut(auth);
 //ODHLASENIE
 
-//ADD ACTION
-export const addAction = async (actionObject) => {
-  await setDoc(doc(firestore, "actions", actionObject.id), actionObject);
+//ADD PROJECT
+export const addProject = async (userId, projectObject) => {
+  const userRef = doc(firestore, "users", userId);
+
+  await updateDoc(userRef, { projects: [...projectObject] });
 };
-//ADD ACTION
-
-//ADD ATTENDANT
-export const addAttendant = async (actionId, newAttendantsData) => {
-  const actionRef = doc(firestore, "actions", actionId);
-
-  await updateDoc(actionRef, {
-    actionAttendants: newAttendantsData,
-  });
-};
-//ADD ATTENDANT
-
-//ADD SUBSCRIBER
-export const addSubscriber = async (newSubscribersData) => {
-  const subscribersRef = doc(firestore, "subscribers", "subscribers");
-
-  await updateDoc(subscribersRef, {
-    subscribersData: newSubscribersData,
-  });
-};
-//ADD SUBSCRIBER
+//ADD PROJECT
