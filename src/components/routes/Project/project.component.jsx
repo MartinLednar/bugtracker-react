@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { ChevronRight, Plus, Tool, CheckCircle, AlertTriangle, ChevronLeft, Trash2, UserPlus, X, Send, Star, Lock, Unlock } from "react-feather";
+import { ChevronRight, Plus, Tool, CheckCircle, AlertTriangle, ChevronLeft, Trash2, Users, X, Star, Lock, Unlock } from "react-feather";
 import { SidebarModal, SidebarModalShadow } from "../../sidebar/sidebar.style";
 import { ARROW_LINK_TYPE_CLASSES, ArrowLink } from "../../arrow-link/arrow-link.component";
 import CustomInput from "../../custom-input/custom-input.component";
@@ -21,7 +21,8 @@ import {
 } from "../../universal-styles";
 import { ProjectContainer } from "./project.style";
 
-import { selectProject } from "../../../store/slices/user-slice/user.selector";
+import { selectProject, selectCurrentUser } from "../../../store/slices/user-slice/user.selector";
+import { updateProjects } from "../../../utils/firebase/firebase.utils";
 
 const sidebarsInitialState = {
   sidebar1: false,
@@ -29,18 +30,33 @@ const sidebarsInitialState = {
   sidebar3: false,
 };
 
-const ProjectPage = () => {
-  const { projectID } = useParams();
-  const { title, issues = [], users = [] } = useSelector((state) => selectProject(state, projectID));
-  const [sidebarOpen, setSidebarOpen] = useState(sidebarsInitialState);
+const issueFormInitialState = {
+  title: "",
+  type: "",
+  priority: "",
+  description: "",
+};
 
-  const newIssuesArr = [...issues];
+const ProjectPage = () => {
+  const navigate = useNavigate();
+  const { projectID } = useParams();
+  const { id, displayName, projects } = useSelector(selectCurrentUser);
+  const projectData = useSelector((state) => selectProject(state, projectID));
+  const [sidebarOpen, setSidebarOpen] = useState(sidebarsInitialState);
+  const [issueForm, setIssueForm] = useState(issueFormInitialState);
+  const [issuesToSort, setIssuesToSort] = useState();
+  const { type, priority, description } = issueForm;
+
+  useEffect(() => {
+    if (projectData?.issues) {
+      setIssuesToSort([...projectData.issues]);
+    }
+  }, [projectData]);
 
   const sortIssues = (a, b) => (a.closed && !b.closed ? 1 : b.closed && !a.closed ? -1 : 0);
 
   const toggleSidebar = (e) => {
-    const name = e.currentTarget.getAttribute("name");
-
+    const name = typeof e !== "string" ? e.currentTarget.getAttribute("name") : e;
     if (name) {
       return setSidebarOpen({
         ...sidebarOpen,
@@ -49,6 +65,46 @@ const ProjectPage = () => {
     }
 
     return setSidebarOpen(sidebarsInitialState);
+  };
+
+  const handleDelete = async () => {
+    const newProjectsArr = projects.filter((project) => project.id !== projectID);
+    navigate("/projects");
+    await updateProjects(id, newProjectsArr);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const isCreated = projectData.issues.some((issue) => issue.title === "title");
+
+    if (isCreated) {
+      return;
+    } else {
+      const newIssue = {
+        id: new Date().getTime().toString(),
+        created: new Date().toLocaleDateString(),
+        author: displayName,
+        title: issueForm.title,
+        type: type,
+        priority: priority,
+        description: description,
+      };
+
+      const newIssuesArr = [...projectData.issues, newIssue];
+      const newProjectsArr = projects.filter((project) => project.id !== projectID);
+
+      await updateProjects(id, [...newProjectsArr, { ...projectData, issues: newIssuesArr }]);
+
+      setIssueForm(issueFormInitialState);
+      toggleSidebar("sidebar1");
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setIssueForm({ ...issueForm, [name]: value });
   };
 
   return (
@@ -60,7 +116,7 @@ const ProjectPage = () => {
 
         <HeadingSecondary>New issue</HeadingSecondary>
 
-        <form action="#" className="modal-form">
+        <form onSubmit={handleSubmit} className="modal-form">
           <InputGroupColumn>
             <HeadingTerciary>Type</HeadingTerciary>
 
@@ -70,7 +126,7 @@ const ProjectPage = () => {
                   <Tool />
                   Fix
                 </label>
-                <CustomInput type="radio" name="type" id="project-type-1" />
+                <CustomInput type="radio" required checked={type === "fix"} value="fix" name="type" id="project-type-1" onChange={handleChange} />
               </InputGroup>
 
               <InputGroup>
@@ -78,7 +134,7 @@ const ProjectPage = () => {
                   <CheckCircle />
                   To-do
                 </label>
-                <CustomInput type="radio" name="type" id="project-type-2" />
+                <CustomInput type="radio" checked={type === "todo"} value="todo" name="type" id="project-type-2" onChange={handleChange} />
               </InputGroup>
 
               <InputGroup>
@@ -86,7 +142,7 @@ const ProjectPage = () => {
                   <AlertTriangle />
                   Bug
                 </label>
-                <CustomInput type="radio" name="type" id="project-type-3" />
+                <CustomInput type="radio" checked={type === "bug"} value="bug" name="type" id="project-type-3" onChange={handleChange} />
               </InputGroup>
             </RadioGroup>
           </InputGroupColumn>
@@ -97,29 +153,29 @@ const ProjectPage = () => {
             <RadioGroup>
               <InputGroup>
                 <label htmlFor="issue-priority-1"> Low </label>
-                <CustomInput type="radio" name="priority" id="issue-priority-1" />
+                <CustomInput type="radio" required checked={priority === "low"} value="low" name="priority" id="issue-priority-1" onChange={handleChange} />
               </InputGroup>
 
               <InputGroup>
                 <label htmlFor="issue-priority-2"> Medium </label>
-                <CustomInput type="radio" name="priority" id="issue-priority-2" />
+                <CustomInput type="radio" checked={priority === "medium"} value="medium" name="priority" id="issue-priority-2" onChange={handleChange} />
               </InputGroup>
 
               <InputGroup>
                 <label htmlFor="issue-priority-3"> High </label>
-                <CustomInput type="radio" name="priority" id="issue-priority-3" />
+                <CustomInput type="radio" checked={priority === "high"} value="high" name="priority" id="issue-priority-3" onChange={handleChange} />
               </InputGroup>
             </RadioGroup>
           </InputGroupColumn>
 
           <InputGroupColumn>
             <HeadingTerciary>Title</HeadingTerciary>
-            <CustomInput type="text" name="issueName" />
+            <CustomInput type="text" name="title" required value={issueForm.title} onChange={handleChange} />
           </InputGroupColumn>
 
           <InputGroupColumn>
             <HeadingTerciary>Description</HeadingTerciary>
-            <CustomInput as="textarea" type="textarea" name="issueDescription" rows="3" />
+            <CustomInput as="textarea" type="textarea" required name="description" rows="3" value={description} onChange={handleChange} />
           </InputGroupColumn>
 
           <CustomButton type="submit">Create issue</CustomButton>
@@ -132,44 +188,20 @@ const ProjectPage = () => {
         <HeadingSecondary>Members</HeadingSecondary>
 
         <InputGroupColumn>
-          {
-            //<CustomInput type="search" name="projectSearch" placeholder="Search people" />
-          }
           <div className="search-results-box">
-            {users.map((user, index) => (
-              <div key={index} className="search-result">
-                <div className="profile-info">
-                  <ProfileImage className="profile-img" src="/img/imgBig1.jpg" alt="Profile" />
-                  <h4 className="profile-name-search">{user.displayName}</h4>
-                </div>
+            {projectData?.users &&
+              projectData.users.map((user, index) => (
+                <div key={index} className="search-result">
+                  <div className="profile-info">
+                    <ProfileImage className="profile-img" src="/img/imgBig1.jpg" alt="Profile" />
+                    <h4 className="profile-name-search">{user.displayName}</h4>
+                  </div>
 
-                {user.role === "owner" ? (
                   <p title="Owner">
                     <Star />
                   </p>
-                ) : (
-                  "Obyc"
-                )}
-              </div>
-            ))}
-          </div>
-        </InputGroupColumn>
-
-        <HeadingSecondary>Invite</HeadingSecondary>
-
-        <InputGroupColumn>
-          <CustomInput type="search" name="projectSearch" placeholder="Search people" />
-          <div className="search-results-box">
-            <div className="search-result">
-              <div className="profile-info">
-                <ProfileImage className="profile-img" src="/img/imgBig1.jpg" alt="Profile" />
-                <h4 className="profile-name-search">Martin Lednár</h4>
-              </div>
-
-              <p className="search-invite-btn" title="Send invite">
-                <Send />
-              </p>
-            </div>
+                </div>
+              ))}
           </div>
         </InputGroupColumn>
       </SidebarModal>
@@ -179,16 +211,14 @@ const ProjectPage = () => {
 
         <HeadingSecondary>Delete project</HeadingSecondary>
 
-        <form action="#" className="modal-form">
-          <InputGroupColumn>
-            <p className="modal-form-text">Be careful this step is irreversible!</p>
+        <InputGroupColumn>
+          <p className="modal-form-text">Be careful this step is irreversible!</p>
 
-            <CustomButton buttonType={CUSTOM_BUTTON_TYPE_CLASSES.red}>
-              Delete project
-              <Trash2 />
-            </CustomButton>
-          </InputGroupColumn>
-        </form>
+          <CustomButton onClick={handleDelete} buttonType={CUSTOM_BUTTON_TYPE_CLASSES.red}>
+            Delete project
+            <Trash2 />
+          </CustomButton>
+        </InputGroupColumn>
       </SidebarModal>
 
       <MainContentContainer>
@@ -198,75 +228,81 @@ const ProjectPage = () => {
             Go back
           </ArrowLink>
 
-          <HeadingContainer>
-            <HeadingMain>Project: {title}</HeadingMain>
+          {!projectData ? (
+            <HeadingTerciary>Loading...</HeadingTerciary>
+          ) : (
+            <Fragment>
+              <HeadingContainer>
+                <HeadingMain>Project: {projectData.title}</HeadingMain>
 
-            <div className="project-action-box">
-              <CustomButton onClick={toggleSidebar} name="sidebar1">
-                Add
-                <Plus />
-              </CustomButton>
+                <div className="project-action-box">
+                  <CustomButton onClick={toggleSidebar} name="sidebar1">
+                    Add
+                    <Plus />
+                  </CustomButton>
 
-              <CustomButton onClick={toggleSidebar} name="sidebar2">
-                Invite
-                <UserPlus />
-              </CustomButton>
+                  <CustomButton onClick={toggleSidebar} name="sidebar2">
+                    Members
+                    <Users />
+                  </CustomButton>
 
-              <CustomButton onClick={toggleSidebar} buttonType={CUSTOM_BUTTON_TYPE_CLASSES.red} name="sidebar3">
-                Delete project
-                <Trash2 />
-              </CustomButton>
-            </div>
-          </HeadingContainer>
+                  <CustomButton onClick={toggleSidebar} buttonType={CUSTOM_BUTTON_TYPE_CLASSES.red} name="sidebar3">
+                    Delete project
+                    <Trash2 />
+                  </CustomButton>
+                </div>
+              </HeadingContainer>
 
-          <TableContainer>
-            <table>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Type</th>
+              <TableContainer>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Name</th>
+                      <th>Type</th>
 
-                  <th>Priority</th>
-                  <th>Status</th>
-                  <th></th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {newIssuesArr &&
-                  newIssuesArr.sort(sortIssues).map((issue, index) => (
-                    <tr key={issue.id}>
-                      <td>{index + 1}.</td>
-                      <td>{issue.title}</td>
-                      <td>
-                        <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES[issue.type]} />
-                      </td>
-                      <td>
-                        <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES[issue.priority]} />
-                      </td>
-                      <td>
-                        {issue.closed ? (
-                          <span title="Closed">
-                            <Lock style={{ color: "red" }} />
-                          </span>
-                        ) : (
-                          <span title="Closed">
-                            <Unlock style={{ color: "green" }} />
-                          </span>
-                        )}
-                      </td>
-                      <td>
-                        <ArrowLink to={`/project/${projectID}/issue/${issue.id}`} linkType={ARROW_LINK_TYPE_CLASSES.arrowRight}>
-                          See details
-                          <ChevronRight />
-                        </ArrowLink>
-                      </td>
+                      <th>Priority</th>
+                      <th>Status</th>
+                      <th></th>
                     </tr>
-                  ))}
-              </tbody>
-            </table>
-          </TableContainer>
+                  </thead>
+
+                  <tbody>
+                    {issuesToSort &&
+                      issuesToSort.sort(sortIssues).map((issue, index) => (
+                        <tr key={issue.id}>
+                          <td>{index + 1}.</td>
+                          <td>{issue.title}</td>
+                          <td>
+                            <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES[issue.type]} />
+                          </td>
+                          <td>
+                            <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES[issue.priority]} />
+                          </td>
+                          <td>
+                            {issue.closed ? (
+                              <span title="Closed">
+                                <Lock style={{ color: "red" }} />
+                              </span>
+                            ) : (
+                              <span title="Closed">
+                                <Unlock style={{ color: "green" }} />
+                              </span>
+                            )}
+                          </td>
+                          <td>
+                            <ArrowLink to={`/project/${projectID}/issue/${issue.id}`} linkType={ARROW_LINK_TYPE_CLASSES.arrowRight}>
+                              See details
+                              <ChevronRight />
+                            </ArrowLink>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              </TableContainer>
+            </Fragment>
+          )}
         </ProjectContainer>
       </MainContentContainer>
     </Fragment>

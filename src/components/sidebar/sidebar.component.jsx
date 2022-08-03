@@ -33,31 +33,14 @@ const SidebarMain = () => {
             My projects
           </CustomNavLink>
         </li>
-        <li className="nav-item">
-          <CustomNavLink to="/tasks">
-            <Briefcase />
-            My tasks
-          </CustomNavLink>
-        </li>
-        <li className="nav-item">
-          <CustomNavLink to="/notifications">
-            <Bell />
-            Notifications
-            <span className="notification">1</span>
-          </CustomNavLink>
-        </li>
+
         <li className="nav-item">
           <CustomNavLink to="/guide">
             <HelpCircle />
             Guide
           </CustomNavLink>
         </li>
-        <li className="nav-item">
-          <CustomNavLink to="/">
-            <LogIn />
-            Login page
-          </CustomNavLink>
-        </li>
+
         <li className="nav-item">
           <CustomNavLink as="p" onClick={handleClick} style={{ color: "var(--color-red)" }}>
             <LogOut />

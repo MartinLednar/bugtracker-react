@@ -70,10 +70,11 @@ export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth,
 export const signOutUser = async () => signOut(auth);
 //ODHLASENIE
 
-//ADD PROJECT
-export const addProject = async (userId, projectObject) => {
+//UPDATE PROJECTS
+export const updateProjects = async (userId, projectObject) => {
   const userRef = doc(firestore, "users", userId);
+  console.log(projectObject);
 
   await updateDoc(userRef, { projects: [...projectObject] });
 };
-//ADD PROJECT
+//UPDATE PROJECTS

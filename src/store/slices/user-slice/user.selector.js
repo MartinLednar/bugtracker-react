@@ -9,7 +9,6 @@ const selectProjects = createSelector([selectCurrentUser], (userReducer) => (use
 export const selectProject = createSelector(
   selectProjects,
   (_, projectId) => projectId,
-
   (projects, projectId) => (projects ? projects.filter((project) => project.id === projectId)[0] : {})
 );
 
@@ -25,7 +24,7 @@ export const selectIssue = createSelector(
       const { title, issues } = projects.filter((project) => project.id === projectID)[0];
       const issue = issues.filter((issue) => issue.id === issueID)[0];
 
-      return { projectTitle: title, issue };
+      return { projectTitle: title, issues, issue };
     }
   }
 );

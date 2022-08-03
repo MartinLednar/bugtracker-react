@@ -9,7 +9,7 @@ import { MainContentContainer, HeadingContainer, HeadingMain, HeadingSecondary, 
 import { ProjectsContainer } from "./projects.style";
 
 import { selectCurrentUser } from "../../../store/slices/user-slice/user.selector";
-import { addProject } from "../../../utils/firebase/firebase.utils";
+import { updateProjects } from "../../../utils/firebase/firebase.utils";
 
 const ProjectsPage = () => {
   const { id, projects = [], displayName } = useSelector(selectCurrentUser);
@@ -29,10 +29,11 @@ const ProjectsPage = () => {
       setProjectName("");
     } else {
       const newProjectData = {
-        id: new Date().getTime(),
-        title: projectName,
+        id: new Date().getTime().toString(),
+        title: projectName.slice(0, 1).toUpperCase() + projectName.slice(1).toLowerCase(),
         owner: displayName,
         created: new Date().toLocaleDateString(),
+        issues: [],
         users: [
           {
             id: 1,
@@ -41,7 +42,7 @@ const ProjectsPage = () => {
           },
         ],
       };
-      addProject(id, [...projects, newProjectData]);
+      updateProjects(id, [...projects, newProjectData]);
       setSidebarOpen(false);
       setProjectName("");
     }
