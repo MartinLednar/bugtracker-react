@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, getDocs } from "firebase/firestore";
 import { getAuth, signOut, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 
 const firebaseConfig = {
@@ -58,7 +58,9 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
 
-  return await signInWithEmailAndPassword(auth, email, password);
+  await signInWithEmailAndPassword(auth, email, password)
+    .then((user) => user)
+    .catch((err) => false);
 };
 //LOGIN
 
@@ -78,3 +80,11 @@ export const updateProjects = async (userId, projectObject) => {
   await updateDoc(userRef, { projects: [...projectObject] });
 };
 //UPDATE PROJECTS
+
+//CHECK EMAIL IN USE
+export const checkEmail = async (email) => {
+  const collectionSnapshot = await getDocs(collection(firestore, "users"));
+  const isUsed = collectionSnapshot.docs.some((doc) => doc.data().email === email);
+  return isUsed;
+};
+//CHECK EMAIL IN USE

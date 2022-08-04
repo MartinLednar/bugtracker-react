@@ -14,10 +14,9 @@ const HomePage = () => {
   const currentUser = useSelector(selectCurrentUser);
 
   useEffect(() => {
-    if (!currentUser && location.pathname !== "/") {
+    if (Array.isArray(currentUser) && location.pathname !== "/") {
       return navigate("/");
-    }
-    if (currentUser && location.pathname === "/") {
+    } else if (!Array.isArray(currentUser) && location.pathname === "/") {
       return navigate("/projects");
     }
   });

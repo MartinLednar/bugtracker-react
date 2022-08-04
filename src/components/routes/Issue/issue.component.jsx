@@ -1,4 +1,5 @@
-import { useParams } from "react-router-dom";
+import { Fragment } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { ChevronLeft, Trash2, Unlock, Lock } from "react-feather";
 import { Capsule, CAPSULE_STYLE_CLASSES } from "../../capsule/capsule.component";
 import { CircleButton, CIRCLE_BUTTON_TYPE_CLASSES } from "../../circle-button/circle-button.component";
@@ -8,12 +9,31 @@ import { CustomButton } from "../../custom-button/custom-button.component";
 import { IssueContainer } from "./issue.style";
 
 import { useSelector } from "react-redux";
-import { selectIssue } from "../../../store/slices/user-slice/user.selector";
-import { Fragment } from "react";
+import { selectCurrentUser, selectIssue, selectProject } from "../../../store/slices/user-slice/user.selector";
+import { updateProjects } from "../../../utils/firebase/firebase.utils";
+import Loader from "../../loading/loading.component";
 
 const IssuePage = () => {
+  const navigate = useNavigate();
   const { issueID, projectID } = useParams();
+  const { id, projects } = useSelector(selectCurrentUser);
+  const projectData = useSelector((state) => selectProject(state, projectID));
   const { issue, projectTitle, issues } = useSelector((state) => selectIssue(state, { projectID, issueID }));
+
+  const handleDelete = async () => {
+    const newIssuesArr = issues.filter((issue) => issue.id !== issueID);
+    const newProjectsArr = projects.filter((project) => project.id !== projectID);
+
+    navigate(`/project/${projectID}`);
+    await updateProjects(id, [...newProjectsArr, { ...projectData, issues: newIssuesArr }]);
+  };
+
+  const toggleStatus = async () => {
+    const newIssuesArr = issues.filter((issue) => issue.id !== issueID);
+    const newProjectsArr = projects.filter((project) => project.id !== projectID);
+
+    await updateProjects(id, [...newProjectsArr, { ...projectData, issues: [...newIssuesArr, { ...issue, closed: !issue.closed }] }]);
+  };
 
   return (
     <MainContentContainer>
@@ -24,7 +44,7 @@ const IssuePage = () => {
         </ArrowLink>
 
         {!issue ? (
-          <HeadingTerciary>Loading...</HeadingTerciary>
+          <Loader />
         ) : (
           <Fragment>
             <HeadingContainer>
@@ -59,7 +79,7 @@ const IssuePage = () => {
                     //</CircleButton>
                   }
 
-                  <CircleButton buttonStyle={CIRCLE_BUTTON_TYPE_CLASSES.red} title="Delete issue">
+                  <CircleButton buttonStyle={CIRCLE_BUTTON_TYPE_CLASSES.red} title="Delete issue" onClick={handleDelete}>
                     <Trash2 />
                   </CircleButton>
                 </div>
@@ -67,20 +87,16 @@ const IssuePage = () => {
 
               <div className="issue-details">
                 <h2 className="issue-detail">
-                  <span className="text-bold">Created by:</span> Martin Lednár
+                  <span className="text-bold">Created by:</span> {issue.author}
                 </h2>
                 <h2 className="issue-detail">
-                  <span className="text-bold">Date:</span> 12.6.2022
+                  <span className="text-bold">Date:</span> {issue.created}
                 </h2>
               </div>
             </HeadingContainer>
 
             <HeadingSecondary>Description</HeadingSecondary>
-            <p className="issue-description">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, exercitationem! Quis neque vero mollitia reprehenderit obcaecati, magnam necessitatibus voluptate
-              quasi fuga dicta dolores autem, perspiciatis tenetur laudantium. Consequatur quidem ex illo rerum minima natus, iure molestias rem sed beatae fugiat obcaecati aperiam
-              nam, architecto eaque soluta fugit animi similique sunt!
-            </p>
+            <p className="issue-description">{issue.description}</p>
 
             {
               //   <HeadingSecondary>Workers</HeadingSecondary>
@@ -111,30 +127,26 @@ const IssuePage = () => {
             }
 
             <div className="issue-manage-group">
-              {issue ? (
-                issue.closed ? (
-                  <Fragment>
-                    <HeadingTerciary>Re-open Issue</HeadingTerciary>
-                    <p>In case the issue wasn't fixed.</p>
+              {issue.closed ? (
+                <Fragment>
+                  <HeadingTerciary>Re-open Issue</HeadingTerciary>
+                  <p>In case the issue wasn't fixed.</p>
 
-                    <CustomButton>
-                      Re-open issue
-                      <Unlock />
-                    </CustomButton>
-                  </Fragment>
-                ) : (
-                  <Fragment>
-                    <HeadingTerciary>Close Issue</HeadingTerciary>
-                    <p>In case the issue was resolved.</p>
-
-                    <CustomButton>
-                      Close issue
-                      <Lock />
-                    </CustomButton>
-                  </Fragment>
-                )
+                  <CustomButton onClick={toggleStatus}>
+                    Re-open issue
+                    <Unlock />
+                  </CustomButton>
+                </Fragment>
               ) : (
-                ""
+                <Fragment>
+                  <HeadingTerciary>Close Issue</HeadingTerciary>
+                  <p>In case the issue was resolved.</p>
+
+                  <CustomButton onClick={toggleStatus}>
+                    Close issue
+                    <Lock />
+                  </CustomButton>
+                </Fragment>
               )}
             </div>
           </Fragment>

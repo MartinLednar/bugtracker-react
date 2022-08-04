@@ -20,6 +20,7 @@ import {
   InputGroup,
 } from "../../universal-styles";
 import { ProjectContainer } from "./project.style";
+import Loader from "../../loading/loading.component";
 
 import { selectProject, selectCurrentUser } from "../../../store/slices/user-slice/user.selector";
 import { updateProjects } from "../../../utils/firebase/firebase.utils";
@@ -79,16 +80,17 @@ const ProjectPage = () => {
     const isCreated = projectData.issues.some((issue) => issue.title === "title");
 
     if (isCreated) {
-      return;
+      return setIssueForm(issueFormInitialState);
     } else {
       const newIssue = {
-        id: new Date().getTime().toString(),
+        id: Math.trunc(Math.random() * 1000000).toString(),
         created: new Date().toLocaleDateString(),
         author: displayName,
-        title: issueForm.title,
+        title: issueForm.title.slice(0, 1).toUpperCase() + issueForm.title.slice(1).toLowerCase(),
         type: type,
         priority: priority,
         description: description,
+        closed: false,
       };
 
       const newIssuesArr = [...projectData.issues, newIssue];
@@ -229,7 +231,7 @@ const ProjectPage = () => {
           </ArrowLink>
 
           {!projectData ? (
-            <HeadingTerciary>Loading...</HeadingTerciary>
+            <Loader />
           ) : (
             <Fragment>
               <HeadingContainer>
@@ -285,7 +287,7 @@ const ProjectPage = () => {
                                 <Lock style={{ color: "red" }} />
                               </span>
                             ) : (
-                              <span title="Closed">
+                              <span title="Opened">
                                 <Unlock style={{ color: "green" }} />
                               </span>
                             )}

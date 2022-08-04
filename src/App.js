@@ -31,7 +31,7 @@ function App() {
         const userId = await createUserDocumentFromAuth(userAuth);
         userUnubscribeRef.current = onSnapshot(doc(firestore, "users", userId), (userDoc) => dispatch(setCurrentUser(userDoc.data())));
       } else {
-        dispatch(setCurrentUser(userAuth));
+        dispatch(setCurrentUser(null));
       }
     });
 

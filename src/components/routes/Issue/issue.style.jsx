@@ -7,6 +7,11 @@ import { HeadingContainer, HeadingTerciary, TableContainer } from "../../univers
 export const IssueContainer = styled.div`
   height: 100%;
 
+  /* .issue-title-box {
+    width: 40%;
+    min-width: max-content;
+  } */
+
   .issue-title-subbox {
     display: flex;
     align-items: center;
@@ -53,7 +58,7 @@ export const IssueContainer = styled.div`
   }
 
   .issue-type-group:not(:first-child) {
-    margin-left: 2rem;
+    margin: 0 4rem 0 2rem;
   }
 
   .issue-type-group {

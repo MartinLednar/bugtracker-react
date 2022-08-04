@@ -4,7 +4,7 @@ import { HeadingContainer } from "../../universal-styles";
 export const ProjectsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-height: 100%;
+  height: 100%;
 
   & ${HeadingContainer} {
     padding: 0 5rem 1rem;

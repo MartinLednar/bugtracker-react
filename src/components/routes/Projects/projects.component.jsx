@@ -7,12 +7,13 @@ import { CustomButton } from "../../custom-button/custom-button.component";
 import CustomInput from "../../custom-input/custom-input.component";
 import { MainContentContainer, HeadingContainer, HeadingMain, HeadingSecondary, HeadingTerciary, InputGroupColumn } from "../../universal-styles";
 import { ProjectsContainer } from "./projects.style";
+import Loader from "../../loading/loading.component";
 
 import { selectCurrentUser } from "../../../store/slices/user-slice/user.selector";
 import { updateProjects } from "../../../utils/firebase/firebase.utils";
 
 const ProjectsPage = () => {
-  const { id, projects = [], displayName } = useSelector(selectCurrentUser);
+  const { id, projects = null, displayName } = useSelector(selectCurrentUser);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [projectName, setProjectName] = useState("");
 
@@ -23,7 +24,7 @@ const ProjectsPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const isCreated = projects.some((project) => project.title === projectName);
+    const isCreated = projects.some((project) => project.title.toLowerCase() === projectName.toLowerCase());
 
     if (isCreated) {
       setProjectName("");
@@ -78,11 +79,15 @@ const ProjectsPage = () => {
             </div>
           </HeadingContainer>
 
-          <div className="projects-grid">
-            {projects.map((projectData) => (
-              <ProjectPreview key={projectData.id} project={projectData} />
-            ))}
-          </div>
+          {!projects ? (
+            <Loader />
+          ) : (
+            <div className="projects-grid">
+              {projects.map((projectData) => (
+                <ProjectPreview key={projectData.id} project={projectData} />
+              ))}
+            </div>
+          )}
         </ProjectsContainer>
       </MainContentContainer>
     </Fragment>

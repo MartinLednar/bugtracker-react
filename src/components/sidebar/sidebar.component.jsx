@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Home, Briefcase, Bell, HelpCircle, LogIn, LogOut, ChevronRight } from "react-feather";
+import { Home, HelpCircle, LogOut, ChevronRight } from "react-feather";
 import CustomNavLink from "../nav-link/nav-link.component";
 import { SidebarMainContainer } from "./sidebar.style";
 import { ARROW_LINK_TYPE_CLASSES, ArrowLink } from "../arrow-link/arrow-link.component";
@@ -8,9 +8,8 @@ import { signOutUser } from "../../utils/firebase/firebase.utils";
 import { selectCurrentUser } from "../../store/slices/user-slice/user.selector";
 
 const SidebarMain = () => {
-  const { displayName = "" } = useSelector(selectCurrentUser);
-  const handleClick = () => signOutUser();
-
+  const { displayName = "Loading..." } = useSelector(selectCurrentUser);
+  const handleClick = async () => await signOutUser();
   return (
     <SidebarMainContainer>
       <div className="profile-box">

@@ -156,4 +156,11 @@ export const InputGroupColumn = styled.div`
   }
 `;
 
+export const FormMessage = styled(HeadingTerciary)`
+  margin-top: 2rem;
+  font-weight: 400;
+  color: ${({ textColor }) => textColor};
+  text-align: center;
+`;
+
 //FORM STYLES
