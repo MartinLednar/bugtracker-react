@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, Outlet, useLocation } from "react-router-dom";
 import SidebarMain from "../../sidebar/sidebar.component";
-import { MainBoxContainer } from "../../universal-styles";
+import { MainPageContainer } from "./homepage.style";
 
 //SELECTORS
 import { selectCurrentUser } from "../../../store/slices/user-slice/user.selector";
@@ -22,11 +22,11 @@ const HomePage = () => {
   });
 
   return (
-    <MainBoxContainer>
+    <MainPageContainer>
       {location.pathname !== "/" && <SidebarMain />}
 
       <Outlet />
-    </MainBoxContainer>
+    </MainPageContainer>
   );
 };
 

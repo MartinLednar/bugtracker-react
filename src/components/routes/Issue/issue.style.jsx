@@ -7,11 +7,6 @@ import { HeadingContainer, HeadingTerciary, TableContainer } from "../../univers
 export const IssueContainer = styled.div`
   height: 100%;
 
-  /* .issue-title-box {
-    width: 40%;
-    min-width: max-content;
-  } */
-
   .issue-title-subbox {
     display: flex;
     align-items: center;
@@ -33,7 +28,7 @@ export const IssueContainer = styled.div`
   }
 
   & ${HeadingContainer} {
-    margin-top: 4rem;
+    margin-top: 3rem;
     margin-bottom: 8rem;
     flex-wrap: wrap-reverse;
   }
@@ -117,6 +112,12 @@ export const IssueContainer = styled.div`
 
     svg {
       margin-left: 0.5rem;
+    }
+  }
+
+  @media screen and (max-width: 1232px) {
+    .issue-details {
+      margin-bottom: 1rem;
     }
   }
 `;

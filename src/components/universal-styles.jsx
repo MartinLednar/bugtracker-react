@@ -38,6 +38,10 @@ export const MainContentContainer = styled.div`
   padding: 0 5rem 5rem;
   overflow: hidden;
   overflow-y: visible;
+
+  @media screen and (max-width: 860px) {
+    padding: 0 2rem 5rem;
+  }
 `;
 
 export const HeadingContainer = styled.div`
@@ -45,6 +49,22 @@ export const HeadingContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin-top: 3rem;
+
+  #menu-btn {
+    display: none;
+  }
+
+  @media screen and (max-width: 860px) {
+    #menu-btn {
+      display: flex;
+    }
+  }
+  @media screen and (max-width: 1276px) {
+    .project-action-box {
+      margin-top: 1rem;
+    }
+  }
 `;
 
 //MAIN WRAPPERS

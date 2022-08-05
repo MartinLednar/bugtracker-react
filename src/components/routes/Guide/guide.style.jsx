@@ -1,8 +1,13 @@
 import styled from "styled-components";
+import { HeadingMain } from "../../universal-styles";
 
 export const GuideContainer = styled.div`
   width: 100%;
   height: 100%;
+
+  ${HeadingMain} {
+    margin-top: 3rem;
+  }
 
   .guide-text-container {
     max-width: 1100px;
@@ -11,7 +16,7 @@ export const GuideContainer = styled.div`
     margin: 6rem auto 0;
   }
 
-  .guide-text-heading {
+  .guide-heading-main {
     font-family: var(--font-heading);
     font-size: 4rem;
     font-weight: 400;

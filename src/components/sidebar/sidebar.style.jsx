@@ -34,25 +34,6 @@ export const SidebarMainContainer = styled(Sidebar)`
     }
   }
 
-  .notification {
-    font-size: 1.5rem;
-    color: white;
-    display: inline-block;
-    width: 2rem;
-    height: 2rem;
-    text-align: center;
-    margin-left: 1rem;
-    border-radius: 100%;
-    background-color: var(--color-blue);
-  }
-
-  .profile-img {
-    width: 10rem;
-    height: 10rem;
-    border-radius: 100%;
-    margin-right: 3rem;
-  }
-
   .profile-name {
     font-size: 2.3rem;
     font-family: var(--font-heading);
@@ -217,6 +198,75 @@ export const SidebarModal = styled(Sidebar)`
 
   .search-invite-sent-btn svg {
     margin-left: 0.3rem;
+  }
+
+  .profile-box {
+    display: flex;
+    align-items: center;
+  }
+
+  ${ArrowLinkStatic} {
+    font-size: 1.8rem;
+    margin-top: 0.8rem;
+
+    & svg {
+      margin-left: -1px;
+      margin-right: -5px;
+    }
+  }
+
+  .profile-name {
+    font-size: 2.3rem;
+    font-family: var(--font-heading);
+    font-weight: 500;
+  }
+
+  nav {
+    display: inline-block;
+    margin: 5rem 0 auto;
+  }
+
+  .nav-item {
+    width: max-content;
+    list-style: none;
+    font-weight: 400;
+    font-size: 2.3rem;
+  }
+
+  .nav-item:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  .nav-item:last-child .nav-link {
+    color: var(--color-red);
+  }
+
+  .nav-item:hover ${StyledNavLink} {
+    opacity: 0.6;
+  }
+
+  .author {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 400;
+  }
+
+  .author a {
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+    transition: all 0.5s;
+  }
+
+  .author a:hover {
+    color: var(--color-green);
+  }
+
+  .copyright {
+    font-size: 1.8rem;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 0.5rem;
   }
 `;
 

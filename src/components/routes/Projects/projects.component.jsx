@@ -1,7 +1,8 @@
 import { Fragment, useState } from "react";
 import { useSelector } from "react-redux";
 import { SidebarModal, SidebarModalShadow } from "../../sidebar/sidebar.style";
-import { Plus, X } from "react-feather";
+import SidebarMain from "../../sidebar/sidebar.component";
+import { Plus, X, Menu } from "react-feather";
 import ProjectPreview from "../../project-preview/project-preview.component";
 import { CustomButton } from "../../custom-button/custom-button.component";
 import CustomInput from "../../custom-input/custom-input.component";
@@ -12,13 +13,28 @@ import Loader from "../../loading/loading.component";
 import { selectCurrentUser } from "../../../store/slices/user-slice/user.selector";
 import { updateProjects } from "../../../utils/firebase/firebase.utils";
 
+const sidebarsInitialState = {
+  sidebar1: false,
+  sidebarMain: false,
+};
+
 const ProjectsPage = () => {
   const { id, projects = null, displayName } = useSelector(selectCurrentUser);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(sidebarsInitialState);
   const [projectName, setProjectName] = useState("");
   const [formMessage, setFormMessage] = useState("");
 
-  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+  const toggleSidebar = (e) => {
+    const name = e.currentTarget.getAttribute("name");
+    if (name) {
+      return setSidebarOpen({
+        ...sidebarOpen,
+        [name]: !sidebarOpen[name],
+      });
+    }
+
+    return setSidebarOpen(sidebarsInitialState);
+  };
 
   const handleChange = (e) => setProjectName(e.target.value);
 
@@ -47,16 +63,16 @@ const ProjectsPage = () => {
       };
       setFormMessage({ textColor: "green", text: "Project created!" });
       updateProjects(id, [...projects, newProjectData]);
-      setSidebarOpen(false);
+      setSidebarOpen(sidebarsInitialState);
       setProjectName("");
     }
   };
 
   return (
     <Fragment>
-      <SidebarModalShadow isOpen={sidebarOpen} onClick={toggleSidebar} />
-      <SidebarModal isOpen={sidebarOpen}>
-        <X onClick={toggleSidebar} name="sidebar" />
+      <SidebarModalShadow isOpen={sidebarOpen.sidebar1 || sidebarOpen.sidebarMain} onClick={toggleSidebar} />
+      <SidebarModal isOpen={sidebarOpen.sidebar1}>
+        <X onClick={toggleSidebar} name="sidebar1" />
 
         <HeadingSecondary>New project</HeadingSecondary>
 
@@ -70,15 +86,22 @@ const ProjectsPage = () => {
         </form>
       </SidebarModal>
 
-      <MainContentContainer id="no-padding">
+      <SidebarMain navModal toggleMethod={toggleSidebar} isOpen={sidebarOpen.sidebarMain} />
+
+      <MainContentContainer>
         <ProjectsContainer>
           <HeadingContainer>
             <HeadingMain>My Projects</HeadingMain>
 
             <div className="project-action-box">
-              <CustomButton onClick={toggleSidebar}>
+              <CustomButton onClick={toggleSidebar} name="sidebar1">
                 New
                 <Plus />
+              </CustomButton>
+
+              <CustomButton id="menu-btn" onClick={toggleSidebar} name="sidebarMain">
+                Menu
+                <Menu />
               </CustomButton>
             </div>
           </HeadingContainer>

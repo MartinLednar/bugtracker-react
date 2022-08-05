@@ -16,32 +16,25 @@ const GuidePage = () => (
 
       <div className="guide-text-container">
         <div className="guide-text-section">
-          <h3 className="guide-text-heading">About app</h3>
+          <h3 className="guide-heading-main">About app</h3>
           <p className="guide-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem nulla amet animi labore veniam sunt dolor ea vero, dolore et dolores
-            repudiandae accusantium. Exercitationem esse facilis voluptatem nostrum! Voluptas, iure!
-          </p>
-
-          <img src="/img/imgBig1.jpg" alt="Some alt" className="guide-text-img" />
-
-          <p className="guide-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem nulla amet animi labore veniam sunt dolor ea vero, dolore et dolores
-            repudiandae accusantium. Exercitationem esse facilis voluptatem nostrum! Voluptas, iure!
+            This app's name says it all. It's purpose is to have a track of all bugs that need to be resolved, fixes that need to be made or just to-do tasks for all your projects
+            and tasks. It can be even used as a To-do list app. This simple guide shows how to use this app.
           </p>
         </div>
 
         <div className="guide-text-section">
-          <h3 className="guide-text-heading">How to use this app?</h3>
+          <h3 className="guide-heading-main">Homepage</h3>
           <p className="guide-text">
-            It's really simple. The very first step is to create a project in <strong>My projects</strong> section after clicking the New button in
-            the right top corner of the page.
+            It's really simple. The very first step is to create a project in <strong>My projects</strong> section after clicking the New button in the right top corner of the
+            page.
           </p>
 
           <img src="/img/tutImg1.png" alt="Some alt" className="guide-text-img" />
 
           <p className="guide-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem nulla amet animi labore veniam sunt dolor ea vero, dolore et dolores
-            repudiandae accusantium. Exercitationem esse facilis voluptatem nostrum! Voluptas, iure!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem nulla amet animi labore veniam sunt dolor ea vero, dolore et dolores repudiandae accusantium.
+            Exercitationem esse facilis voluptatem nostrum! Voluptas, iure!
           </p>
         </div>
       </div>

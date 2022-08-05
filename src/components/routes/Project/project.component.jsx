@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ChevronRight, Plus, Tool, CheckCircle, AlertTriangle, ChevronLeft, Trash2, Users, X, Star, Lock, Unlock } from "react-feather";
 import { SidebarModal, SidebarModalShadow } from "../../sidebar/sidebar.style";
+import SidebarMain from "../../sidebar/sidebar.component";
 import { ARROW_LINK_TYPE_CLASSES, ArrowLink } from "../../arrow-link/arrow-link.component";
 import CustomInput from "../../custom-input/custom-input.component";
 import { Capsule, CAPSULE_STYLE_CLASSES } from "../../capsule/capsule.component";
@@ -30,6 +31,7 @@ const sidebarsInitialState = {
   sidebar1: false,
   sidebar2: false,
   sidebar3: false,
+  sidebarMain: false,
 };
 
 const issueFormInitialState = {
@@ -60,7 +62,7 @@ const ProjectPage = () => {
   const sortIssues = (a, b) => (a.closed && !b.closed ? 1 : b.closed && !a.closed ? -1 : 0);
 
   const toggleSidebar = (e) => {
-    const name = typeof e !== "string" ? e.currentTarget.getAttribute("name") : e;
+    const name = e.currentTarget.getAttribute("name");
     if (name) {
       return setSidebarOpen({
         ...sidebarOpen,
@@ -104,7 +106,7 @@ const ProjectPage = () => {
 
       setIssueForm(issueFormInitialState);
       setFormMessage({ textColor: "green", text: "Issue created!" });
-      toggleSidebar("sidebar1");
+      toggleSidebar(sidebarsInitialState);
     }
   };
 
@@ -116,7 +118,7 @@ const ProjectPage = () => {
 
   return (
     <Fragment>
-      <SidebarModalShadow isOpen={sidebarOpen.sidebar1 || sidebarOpen.sidebar2 || sidebarOpen.sidebar3} onClick={toggleSidebar} />
+      <SidebarModalShadow isOpen={sidebarOpen.sidebar1 || sidebarOpen.sidebar2 || sidebarOpen.sidebar3 || sidebarOpen.sidebarMain} onClick={toggleSidebar} />
 
       <SidebarModal isOpen={sidebarOpen.sidebar1}>
         <X onClick={toggleSidebar} name="sidebar1" />
@@ -228,6 +230,8 @@ const ProjectPage = () => {
           </CustomButton>
         </InputGroupColumn>
       </SidebarModal>
+
+      <SidebarMain navModal toggleMethod={toggleSidebar} isOpen={sidebarOpen.sidebarMain} />
 
       <MainContentContainer>
         <ProjectContainer>

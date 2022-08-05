@@ -3,7 +3,7 @@ import { LogoLinkContainer } from "./logo-link.style";
 
 const LogoLink = () => (
   <LogoLinkContainer>
-    <Link to="/" className="logo">
+    <Link to="/projects" className="logo">
       <img src="/img/logo.svg" alt="Bugtracker logo" className="logo-img" />
       Bug Tracker
     </Link>
