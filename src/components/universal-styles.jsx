@@ -100,6 +100,7 @@ export const TableContainer = styled.div`
     font-size: 2.1rem;
     padding: 1.8rem 1rem;
     border-bottom: 1px solid rgb(201, 201, 201);
+    min-width: max-content;
   }
 
   ${ArrowLinkRight} {

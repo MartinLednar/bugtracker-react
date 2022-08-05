@@ -11,6 +11,8 @@ export const ProjectContainer = styled.div`
     display: flex;
     align-items: center;
     font-size: 2.1rem;
+    overflow: hidden;
+    overflow-x: visible;
   }
 
   ${CustomButtonGreen} {

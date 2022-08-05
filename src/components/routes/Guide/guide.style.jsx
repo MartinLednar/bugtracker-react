@@ -10,7 +10,7 @@ export const GuideContainer = styled.div`
   }
 
   .guide-text-container {
-    max-width: 1100px;
+    max-width: 1120px;
     font-size: 2.3rem;
     font-weight: 400;
     margin: 6rem auto 0;
@@ -20,6 +20,13 @@ export const GuideContainer = styled.div`
     font-family: var(--font-heading);
     font-size: 4rem;
     font-weight: 400;
+    margin-bottom: 2.5rem;
+  }
+
+  .guide-heading-secondary {
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    font-weight: 300;
     margin-bottom: 2.5rem;
   }
 

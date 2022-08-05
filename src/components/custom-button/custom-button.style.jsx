@@ -12,6 +12,7 @@ export const StyledCustomButton = styled.button`
   display: flex;
   align-items: center;
   width: max-content;
+  min-width: max-content;
 `;
 
 export const CustomButtonGreen = styled(StyledCustomButton)`

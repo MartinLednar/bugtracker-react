@@ -26,16 +26,70 @@ const GuidePage = () => (
         <div className="guide-text-section">
           <h3 className="guide-heading-main">Homepage</h3>
           <p className="guide-text">
-            It's really simple. The very first step is to create a project in <strong>My projects</strong> section after clicking the New button in the right top corner of the
-            page.
+            After you've signed in or registered successfully, you will be redirected to the <strong>My Projects</strong> page. From here it's really simple and pretty straight
+            forward. The very first step is to create a project in <strong>My projects</strong> section after clicking the <strong>New button</strong> in the right top corner of
+            the page. Then you will create a project with desired name.
           </p>
 
           <img src="/img/tutImg1.png" alt="Some alt" className="guide-text-img" />
 
+          <p className="guide-text">After creating the project you should see it appear on the screen like this:</p>
+
+          <img src="/img/tutImg2.png" alt="Some alt" className="guide-text-img" />
+        </div>
+
+        <div className="guide-text-section">
+          <h3 className="guide-heading-main">Project page</h3>
           <p className="guide-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem nulla amet animi labore veniam sunt dolor ea vero, dolore et dolores repudiandae accusantium.
-            Exercitationem esse facilis voluptatem nostrum! Voluptas, iure!
+            After clicking the project box in <strong>My Projects</strong> page, you will land on the <strong>Project</strong> page. Here we have 3 action buttons :{" "}
+            <strong>1. Add issue</strong>, <strong>2. Members</strong> and <strong>3. Delete project</strong> button.
           </p>
+
+          <img src="/img/tutImg3.png" alt="Some alt" className="guide-text-img" />
+
+          <h4 className="guide-heading-secondary">1. Add issue button</h4>
+
+          <p className="guide-text">The process is the same as when creating new project. After creating the issue, you should see it apper on the screen like this:</p>
+
+          <img src="/img/tutImg4.png" alt="Some alt" className="guide-text-img" />
+
+          <h4 className="guide-heading-secondary">2. Members button</h4>
+
+          <p className="guide-text">
+            After clicking this button you will see all users that are members of your project, but now it's just you. But you can still look at your profile and check if it's
+            really you :)
+          </p>
+
+          <h4 className="guide-heading-secondary">3. Delete project</h4>
+
+          <p className="guide-text">This button is pretty self-explanatory. Clicking the button will delete the project.</p>
+        </div>
+
+        <div className="guide-text-section">
+          <h3 className="guide-heading-main">Issue page</h3>
+          <p className="guide-text">
+            This is page for an issue in project. You can see all the details about issue and <strong>Delete issue (1.)</strong> or <strong>Close issue (2.)</strong> in case the
+            issue was resolved.
+          </p>
+
+          <img src="/img/tutImg5.png" alt="Some alt" className="guide-text-img" />
+        </div>
+
+        <div className="guide-text-section">
+          <h3 className="guide-heading-main">Profile page</h3>
+          <p className="guide-text">This is page where you can manage your account.</p>
+
+          <h3 className="guide-heading-secondary">1. Change profile picture</h3>
+
+          <p className="guide-text">As title says you can change your profile picture or reset the picture to the default one.</p>
+
+          <h3 className="guide-heading-secondary">2. Delete account</h3>
+
+          <p className="guide-text">
+            Again pretty self-explanatory, but be careful this step is <strong>irreversible</strong>!
+          </p>
+
+          <img src="/img/tutImg6.png" alt="Some alt" className="guide-text-img" />
         </div>
       </div>
     </GuideContainer>

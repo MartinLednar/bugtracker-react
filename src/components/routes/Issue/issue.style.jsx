@@ -31,6 +31,8 @@ export const IssueContainer = styled.div`
     margin-top: 3rem;
     margin-bottom: 8rem;
     flex-wrap: wrap-reverse;
+    overflow: hidden;
+    overflow-x: visible;
   }
 
   .issue-detail {
