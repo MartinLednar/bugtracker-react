@@ -4,16 +4,16 @@ import CustomNavLink from "../nav-link/nav-link.component";
 import { SidebarMainContainer } from "./sidebar.style";
 import { ARROW_LINK_TYPE_CLASSES, ArrowLink } from "../arrow-link/arrow-link.component";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
-
+import { ProfileImage } from "../universal-styles";
 import { selectCurrentUser } from "../../store/slices/user-slice/user.selector";
 
 const SidebarMain = () => {
-  const { displayName = "Loading..." } = useSelector(selectCurrentUser);
+  const { displayName = "Loading...", profileImage = {} } = useSelector(selectCurrentUser);
   const handleClick = async () => await signOutUser();
   return (
     <SidebarMainContainer>
       <div className="profile-box">
-        <img className="profile-img" src="/img/basicProfile.svg" alt="Profile" />
+        <ProfileImage imgSrc={profileImage.imgURL} />
 
         <div className="profile-text-box">
           <h2 className="profile-name">{displayName}</h2>

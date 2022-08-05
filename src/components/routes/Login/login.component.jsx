@@ -62,7 +62,15 @@ const LoginPage = () => {
 
           setFormMessage({ text: "Registered!", textColor: "green" });
 
-          await createUserDocumentFromAuth(user, { displayName: registerForm.displayName });
+          await createUserDocumentFromAuth(user, {
+            displayName: registerForm.displayName,
+            profileImage: {
+              default: true,
+              fullPath: "defaultProfileImg/basicProfile.svg",
+              imgURL:
+                "https://firebasestorage.googleapis.com/v0/b/bugtracker-3e884.appspot.com/o/defaultProfileImg%2FbasicProfile.svg?alt=media&token=85a00853-81dd-471f-ba32-155360d963e7",
+            },
+          });
         }
       }
     }

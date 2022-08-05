@@ -90,11 +90,15 @@ export const TableContainer = styled.div`
 //TABLE
 
 //PROFILE IMG
-export const ProfileImage = styled.img`
+export const ProfileImage = styled.div`
   width: 10rem;
   height: 10rem;
   border-radius: 100%;
   margin-right: 3rem;
+  background-image: url(${({ imgSrc }) => imgSrc});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 `;
 
 //PROFILE IMG

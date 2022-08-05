@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, getDocs } from "firebase/firestore";
-import { getAuth, signOut, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, getDocs, deleteDoc } from "firebase/firestore";
+import { getAuth, signOut, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword, deleteUser } from "firebase/auth";
+import { deleteObject, getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBjiHMJ8qNbHsNIqoVtssZrtoXZTPV4Rfs",
@@ -14,6 +15,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const firestore = getFirestore(app);
 export const auth = getAuth(app);
+export const storage = getStorage(app);
 
 //CREATE DOC IN DB
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
@@ -58,7 +60,7 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
 
-  await signInWithEmailAndPassword(auth, email, password)
+  return await signInWithEmailAndPassword(auth, email, password)
     .then((user) => user)
     .catch((err) => false);
 };
@@ -88,3 +90,50 @@ export const checkEmail = async (email) => {
   return isUsed;
 };
 //CHECK EMAIL IN USE
+
+//UPLOAD PROFILE IMAGE
+export const uploadImage = async (userId, file) => {
+  const storageRef = ref(storage, `userImages/${userId}.${file.type.slice(6)}`);
+  return await uploadBytes(storageRef, file).then(async (snapshot) => {
+    const { fullPath } = snapshot.metadata;
+    const downloadURL = await getDownloadURL(storageRef).then((url) => url);
+
+    return { fullPath, downloadURL };
+  });
+};
+//UPLOAD PROFILE IMAGE
+
+//DELETE PROFILE IMAGE
+export const deleteImage = async (fullPath) => {
+  const imgRef = ref(storage, fullPath);
+
+  deleteObject(imgRef)
+    .then(() => console.log("DELETED"))
+    .catch((err) => console.log(err));
+};
+//DELETE PROFILE IMAGE
+
+//UPDATE USER PROFILE IMAGE
+export const updateProfileImage = async (userId, imgURL, fullPath, isDefault) => {
+  const userRef = doc(firestore, "users", userId);
+  await updateDoc(userRef, { profileImage: { default: isDefault, imgURL, fullPath } });
+};
+//UPDATE USER PROFILE IMAGE
+
+//DELETE USER PROFILE
+export const deleteWholeUser = async (userId, fullPath) => {
+  const userRef = doc(firestore, "users", userId);
+
+  await deleteUser(auth.currentUser)
+    .then(() => console.log("DELETED USER"))
+    .catch((err) => console.log(err));
+
+  // await signOutUser();
+
+  if (fullPath !== "defaultProfileImg/basicProfile.svg") {
+    await deleteImage(fullPath);
+  }
+
+  await deleteDoc(userRef);
+};
+//DELETE USER PROFILE

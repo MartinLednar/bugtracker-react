@@ -18,6 +18,7 @@ import {
   InputGroupColumn,
   RadioGroup,
   InputGroup,
+  FormMessage,
 } from "../../universal-styles";
 import { ProjectContainer } from "./project.style";
 import Loader from "../../loading/loading.component";
@@ -45,6 +46,8 @@ const ProjectPage = () => {
   const projectData = useSelector((state) => selectProject(state, projectID));
   const [sidebarOpen, setSidebarOpen] = useState(sidebarsInitialState);
   const [issueForm, setIssueForm] = useState(issueFormInitialState);
+  const [formMessage, setFormMessage] = useState("");
+
   const [issuesToSort, setIssuesToSort] = useState();
   const { type, priority, description } = issueForm;
 
@@ -77,10 +80,11 @@ const ProjectPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const isCreated = projectData.issues.some((issue) => issue.title === "title");
+    const isCreated = projectData.issues.some((issue) => issue.title.toLowerCase() === issueForm.title.toLowerCase());
 
     if (isCreated) {
-      return setIssueForm(issueFormInitialState);
+      setIssueForm(issueFormInitialState);
+      setFormMessage({ textColor: "red", text: "Issue with this title already exists!" });
     } else {
       const newIssue = {
         id: Math.trunc(Math.random() * 1000000).toString(),
@@ -99,6 +103,7 @@ const ProjectPage = () => {
       await updateProjects(id, [...newProjectsArr, { ...projectData, issues: newIssuesArr }]);
 
       setIssueForm(issueFormInitialState);
+      setFormMessage({ textColor: "green", text: "Issue created!" });
       toggleSidebar("sidebar1");
     }
   };
@@ -119,6 +124,7 @@ const ProjectPage = () => {
         <HeadingSecondary>New issue</HeadingSecondary>
 
         <form onSubmit={handleSubmit} className="modal-form">
+          {formMessage && <FormMessage textColor={formMessage.textColor}>{formMessage.text}</FormMessage>}
           <InputGroupColumn>
             <HeadingTerciary>Type</HeadingTerciary>
 
