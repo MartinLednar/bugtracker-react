@@ -18,7 +18,7 @@ const GuidePage = () => (
         <div className="guide-text-section">
           <h3 className="guide-heading-main">About app</h3>
           <p className="guide-text">
-            This app's name says it all. It's purpose is to have a track of all bugs that need to be resolved, fixes that need to be made or just to-do tasks for all your projects
+            This app's name says it all. Its purpose is to have a track of all bugs that need to be resolved, fixes that need to be made or just to-do tasks for all your projects
             and tasks. It can be even used as a To-do list app. This simple guide shows how to use this app.
           </p>
         </div>
@@ -27,7 +27,7 @@ const GuidePage = () => (
           <h3 className="guide-heading-main">Homepage</h3>
           <p className="guide-text">
             After you've signed in or registered successfully, you will be redirected to the <strong>My Projects</strong> page. From here it's really simple and pretty straight
-            forward. The very first step is to create a project in <strong>My projects</strong> section after clicking the <strong>New button</strong> in the right top corner of
+            forward. The very first step is to create a project in <strong>My projects</strong> section after clicking the <strong>New button</strong> in the top-right corner of
             the page. Then you will create a project with desired name.
           </p>
 
