@@ -44,7 +44,7 @@ const issueFormInitialState = {
 const ProjectPage = () => {
   const navigate = useNavigate();
   const { projectID } = useParams();
-  const { id, displayName, projects } = useSelector(selectCurrentUser);
+  const { id, displayName, projects, profileImage } = useSelector(selectCurrentUser);
   const projectData = useSelector((state) => selectProject(state, projectID));
   const [sidebarOpen, setSidebarOpen] = useState(sidebarsInitialState);
   const [issueForm, setIssueForm] = useState(issueFormInitialState);
@@ -203,7 +203,7 @@ const ProjectPage = () => {
               projectData.users.map((user, index) => (
                 <div key={index} className="search-result">
                   <div className="profile-info">
-                    <ProfileImage className="profile-img" src="/img/imgBig1.jpg" alt="Profile" />
+                    <ProfileImage className="profile-img" imgSrc={profileImage.imgURL} alt="Profile" />
                     <h4 className="profile-name-search">{user.displayName}</h4>
                   </div>
 
@@ -284,7 +284,9 @@ const ProjectPage = () => {
                       issuesToSort.sort(sortIssues).map((issue, index) => (
                         <tr key={issue.id}>
                           <td>{index + 1}.</td>
-                          <td>{issue.title}</td>
+                          <td>
+                            <p>{issue.title}</p>
+                          </td>
                           <td>
                             <Capsule capsuleStyle={CAPSULE_STYLE_CLASSES[issue.type]} />
                           </td>
