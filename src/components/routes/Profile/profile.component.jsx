@@ -84,7 +84,7 @@ const ProfilePage = () => {
           <p className="modal-form-text">Be careful this step is irreversible!</p>
 
           <CustomButton onClick={handleDelete} buttonType={CUSTOM_BUTTON_TYPE_CLASSES.red}>
-            Delete project
+            Delete account
             <Trash2 />
           </CustomButton>
         </InputGroupColumn>
