@@ -19,7 +19,7 @@ const GuidePage = () => (
           <h3 className="guide-heading-main">About app</h3>
           <p className="guide-text">
             This app's name says it all. Its purpose is to have a track of all bugs that need to be resolved, fixes that need to be made or just to-do tasks for all your projects
-            and tasks. It can be even used as a To-do list app. This simple guide shows how to use this app.
+            and tasks. It can be even used as a To-do list app. This simple guide shows you how to use this app.
           </p>
         </div>
 
